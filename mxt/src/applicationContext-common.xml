@@ -21,7 +21,7 @@
 	 <task:scheduler id="myScheduler" pool-size="2"/> 
     <!-- 配置DataSource数据源 -->  
      <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">       
-        <property name="jndiName" value="java:comp/env/jdbc/mxt" />   
+        <property name="jndiName" value="java:comp/env/jdbc/bdm202370482_db" />   
         <property name="resourceRef" value="true" />    
      </bean>
     <!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  

@@ -1,0 +1,14 @@
+html{color:#666;background-color:#fff;-ms-text-size-adjust:100%;_text-overflow:ellipsis}
+body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,select,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{margin:0;padding:0}
+input[type=search]{-webkit-appearance:textfield}
+textarea{resize:vertical;overflow-y:auto}
+table{border-collapse:collapse;border-spacing:0}
+th{text-align:inherit}
+fieldset,img,iframe{border:0 none}
+img{display:inline-block;vertical-align:bottom;-ms-interpolation-mode:bicubic}
+iframe{display:block}
+ul,ol{list-style:none}
+li{vertical-align:top}
+a {
+    text-decoration: none;
+}

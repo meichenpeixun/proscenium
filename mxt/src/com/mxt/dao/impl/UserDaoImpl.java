@@ -61,4 +61,25 @@ public class UserDaoImpl<T extends User> implements UserDao<T> {
 		return mapper.getCountsToUid(userid,audit);
 	}
 
+	/**
+	 * 根据手机号查询用户
+	 */
+	public User findUserByPhone(String phone){
+		return mapper.findUserByPhone(phone);
+	}
+	
+	/**
+	 * 添加用户
+	 */
+	public void appendUser(User user){
+		mapper.appendUser(user);
+	}
+	
+	/**
+	 * 修改登录信息
+	 */
+	public void updateLoginInfo(User user){
+		mapper.updateLoginInfo(user);
+	}
+	
 }

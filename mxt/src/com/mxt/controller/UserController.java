@@ -1,19 +1,14 @@
 package com.mxt.controller;
 import java.io.IOException;
-
-
-
-
-
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.mxt.entity.Consume;
 import com.mxt.entity.User;
 import com.mxt.util.Md5Util;
@@ -39,7 +34,7 @@ public class UserController extends BaseController {
 	   User u =new User();
 	   u=biz.getUser(username);
 	   if(u==null){
-		   response.getWriter().write("用户不存在");
+		   response.getWriter().write("用户或手机号不存在");
 		   response.getWriter().flush();
 		   response.getWriter().close();
 	   }else if(!u.getPassword().equals(password)){
@@ -49,6 +44,11 @@ public class UserController extends BaseController {
 	   }else{
 		   request.getSession().setAttribute("user", biz.getUser(username));
 		   model.addAttribute(biz.getUser(username));
+		   Date date = new Date();
+		   String ip = InetAddress.getLocalHost().getHostAddress();
+		   u.setLastlogintime(date);
+		   u.setIp(ip);
+		   biz.updateLoginInfo(u);
 		   response.getWriter().write("");
 		   response.getWriter().flush();
 		   response.getWriter().close();
@@ -80,20 +80,21 @@ public class UserController extends BaseController {
 	   request.getSession().invalidate();
 	   return "redirect:/"+"";   
    }
+   
    //注册前ajax校验用户唯一性
    @RequestMapping("/userRegister")
-   public void userRegister(String username2 ,String pwd ,String pwd2,String code) throws IOException {
-	   System.out.println("＃username:　"+username2);
+   public void userRegister(String phone ,String pwd ,String pwd2,String yzcode) throws IOException {
+
 	   User u =new User();
-	   u=biz.getUser(username2);
-	   System.out.println(code);
-	   System.out.println("code**:"+request.getSession().getAttribute("code"));
+	   u = biz.findUserByPhone(phone);
+	   System.out.println(yzcode);
+	   System.out.println("code**:"+request.getSession().getAttribute(phone));
 	   if(u!=null){
 		   response.setContentType("text/html;charset=UTF-8");
-		   response.getWriter().write("用户名已存在！");
+		   response.getWriter().write("该手机号已经被注册！");
 		   response.getWriter().flush();
 		   response.getWriter().close();
-	   }else if(!code.equalsIgnoreCase((String) request.getSession().getAttribute("code"))){
+	   }else if(!yzcode.equalsIgnoreCase((String)request.getSession().getAttribute(phone))){
 		   response.setContentType("text/html;charset=UTF-8");
 		   response.getWriter().write("验证码错误！");
 		   response.getWriter().flush();
@@ -105,14 +106,23 @@ public class UserController extends BaseController {
 		   response.getWriter().close();
 	   }
    }
+   
    //完成注册
    @RequestMapping("/okRegister")
-   public String okRegister(String username2 ,String pwd ) 
+   public String okRegister(String phone ,String pwd ) throws UnknownHostException 
    {   
 	   pwd = Md5Util.strToMD5(pwd);
-	   User user=new User(username2,pwd);
-	   biz.addUser(user);
-	   user=biz.getUser(username2);
+	   User user=new User();
+	   user.setPhone(phone);
+	   user.setPassword(pwd);
+	   String username = "用户"+new Date().getTime();
+	   Date date = new Date();
+	   String ip = InetAddress.getLocalHost().getHostAddress();
+	   user.setCreateTime(date);
+	   user.setUsername(username);
+	   user.setCreateIp(ip);
+	   biz.appendUser(user);
+	   user=biz.findUserByPhone(phone);
 	   Consume co = new Consume(user.getUserid());
 	   biz.addconsume(co);
 	   request.getSession().setAttribute("user",user);

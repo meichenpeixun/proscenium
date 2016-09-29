@@ -70,7 +70,7 @@ body, button, input, select, textarea, code {
 
 /* input */
 .ipt {
-	border: solid 1px #d2d2d2;
+	/* border: solid 1px #d2d2d2;
 	border-left-color: #ccc;
 	border-top-color: #ccc;
 	border-radius: 2px;
@@ -81,7 +81,13 @@ body, button, input, select, textarea, code {
 	line-height: 21px;
 	color: #555;
 	width: 180px;
-	vertical-align: baseline;
+	vertical-align: baseline; */
+	width: 279px;
+	padding: 9px 9px 9px 10px;
+	background-color: #fff;
+	border-color: #d0d6d9;
+	box-shadow: 2px 0px 5px 0px #fff;
+	font-size:14px;
 }
 .ipt-mini {
 	width: 140px;
@@ -210,31 +216,31 @@ input.btn {
 	display:none
 }
 .theme-popover {
-	z-index:9999;
-	position:fixed;
-	top:50%;
-	left:50%;
-	width:660px;
-	height:360px;
-	margin:-180px 0 0 -330px;
-	border-radius:5px;
-	border:solid 2px #666;
-	background-color:#fff;
-	display:none;
-	box-shadow: 0 0 10px #666;
+    z-index: 9999;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 360px;
+    height: 360px;
+    margin: -218px 0 0 -180px;
+   /*  border-radius: 5px; */
+    border: solid 2px #666;
+    background-color: #fff;
+    display: none;
+    box-shadow: 0 0 10px #666;
 }.theme-popover2 {
-	z-index:9999;
-	position:fixed;
-	top:50%;
-	left:50%;
-	width:660px;
-	height:360px;
-	margin:-180px 0 0 -330px;
-	border-radius:5px;
-	border:solid 2px #666;
-	background-color:#fff;
-	display:none;
-	box-shadow: 0 0 10px #666;
+	 z-index: 9999;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 360px;
+    height: auto;
+    margin: -218px 0 0 -180px;
+   /*  border-radius: 5px; */
+    border: solid 2px #666;
+    background-color: #fff;
+    display: none;
+    box-shadow: 0 0 10px #666;
 }
 .theme-poptit {
 	border-bottom:1px solid #ddd;
@@ -248,14 +254,11 @@ input.btn {
 .theme-popbod {
 	padding:60px 15px;
 	color:#444;
-	height: 148px;
 }
 .theme-popbom {
-	padding:15px;
-	background-color:#f6f6f6;
-	border-top:1px solid #ddd;
-	border-radius:0 0 5px 5px;
-	color:#666
+	padding:60px 15px;
+	color:#444;
+	height: 148px;
 }
 .theme-popbom a {
 	margin-left:8px
@@ -295,9 +298,10 @@ input.btn {
 	margin-right:6px
 }
 .dform {
-	padding:80px 60px 40px;
-	text-align: center;
+    padding: 30px 0px 0px 0px;
+    text-align: center;
 }
+.fe{margin-right: 10px;vertical-align: -1px;}
 .dform .ipt_error {
 	background-color:#FFFFCC;
 	border-color:#FFCC66
@@ -331,7 +335,7 @@ display:;
 	margin-top: -180px;
 }
 .theme-signin {
-	margin: -50px -20px -50px 90px;
+	/* margin: -50px -20px -50px 90px; */
 	text-align:left;
 	font-size: 14px;
 }
@@ -342,9 +346,11 @@ display:;
 	font-size: 12px;
 }
 .theme-signin li {
-	padding-left: 80px;
+	padding-left: 33px;
 	margin-bottom: 15px;
+	width:300px;
 }
+.fog{float:right;color: #787d82;}
 .theme-signin li strong {
 	float: left;
 	margin-left: -80px;
@@ -354,6 +360,34 @@ display:;
 }
 .theme-signin .btn {
 	margin-bottom: 10px;
+	width: 300px;
+	height: 50px;
+	font-size: 16px;
+}
+.dsl a{float:left;margin-right:10px;}
+.dsl .j-wx{
+	background: url("../images/wxs.png") no-repeat;
+	display: block;
+	margin-top: 10px;
+	width: 90px;
+	height: 25px;
+	cursor: pointer;
+}.dsl .j-wb{
+	cursor: pointer;
+	display: block;
+	margin-top: 10px;
+	width: 90px;
+	height: 25px;
+	background: url(../images/dsfSprite.png) no-repeat 4449px 4449px;
+	background-position: -10px -53px;
+}.dsl .j-qq{
+	cursor: pointer;
+	display: block;
+	margin-top: 10px;
+	width: 90px;
+	height: 25px;
+	background: url(../images/dsfSprite.png) no-repeat 4449px 4449px;
+	background-position: -112px -13px;
 }
 .theme-signin p {
 	font-size: 12px;

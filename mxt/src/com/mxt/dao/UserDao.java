@@ -21,4 +21,9 @@ public interface UserDao<T> {
 
 	int getCountsToUid(Integer userid, int audit);
 
+	public User findUserByPhone(String phone);					//根据手机号查询用户
+	
+	public void appendUser(User user);				//添加用户
+	
+	public void updateLoginInfo(User user);		//修改登录信息
 }

@@ -1,6 +1,7 @@
 package com.mxt.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Transient;
 
@@ -25,6 +26,12 @@ public class User implements Serializable{
        private String photopath;
        private String code;
        private int usersex;
+       private Date createTime;		//注册时间
+       private String createIp;		//注册时所用ip
+       private String signature;		//个性签名
+       private Date lastlogintime;	//最后登录时间
+       private String lastUpdatePerson;	//最后修改人
+       private String ip;		//登录ip
 	public Integer getUserid() {
 		return userid;
 	}
@@ -109,6 +116,46 @@ public class User implements Serializable{
 	}
 	public void setUsersex(int usersex) {
 		this.usersex = usersex;
+	}
+	
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date date) {
+		this.createTime = date;
+	}
+	public String getCreateIp() {
+		return createIp;
+	}
+	public void setCreateIp(String createIp) {
+		this.createIp = createIp;
+	}
+	public String getSignature() {
+		return signature;
+	}
+	public void setSignature(String signature) {
+		this.signature = signature;
+	}
+	public Date getLastlogintime() {
+		return lastlogintime;
+	}
+	public void setLastlogintime(Date lastlogintime) {
+		this.lastlogintime = lastlogintime;
+	}
+	public String getLastUpdatePerson() {
+		return lastUpdatePerson;
+	}
+	public void setLastUpdatePerson(String lastUpdatePerson) {
+		this.lastUpdatePerson = lastUpdatePerson;
+	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	public User(Integer userid, String username, String password,
 			String idnumber, String fullname, String email, String phone,

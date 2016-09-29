@@ -105,38 +105,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          //alert('成功');
       }
   }
+  
   //登录成功处理
   function LoginSuccess(){
         $.ajax({
             type:"POST",
             url:"<%=basePath%>/user/userLoginCheck.do",
             data:{username:$("#username").val(),password:$("#pass").val()},
-            beforeSend:function(){$("#msg1").html("loading...");},            
+           /*  beforeSend:function(){$("#msg1").html("loading...");},    */         
             success:function(data){
             //判断输入是否成功，成功则跳转
             if(""==data) {
             $("#formid").submit();
-            } else {
-             $("#msg1").html(decodeURI(data));            
+            } 
+            if(data=="用户或手机号不存在"){
+             $("#msg1").html(decodeURI(data));  
+             $("#msg1").show();          
             }
-           
+           	if(data=="密码错误"){
+           	$("#msg3").html(decodeURI(data));  
+             $("#msg3").show();
+          	}
             }           
          });
      }
   
   //初期检查 
   function Check(){
-   var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+   	var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
       if($("#username").val()==""){
           //alert("用户名不能为空");
-          $("#msg1").html("用户名不能为空");
+          $("#msg1").html("用户名或手机号不能为空");
+          $("#msg1").show();
           $("#username").focus();
           return false;
       }
       if($("#pass").val()=="")
       {
           //alert("密码不能为空");
-          $("#msg1").html("密码不能为空");
+          $("#msg3").html("密码不能为空");
+          $("#msg3").show();
           $("#pass").focus();
           return false;
       }
@@ -149,6 +157,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   //按钮事件
   $(document).ready(function(){
       $("#registerButton").click(function(){
+      	$("#msg2").hide();
+      	$("#msg4").hide();
+      	$("#msg5").hide();
           Register();
       });
   });
@@ -160,53 +171,83 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   }
   //注册成功处理
   function RegisterSuccess(){
+  		var yzcode = $("#index_code").val();
+  		var phone = $("#phone").val();
         $.ajax({
             type:"POST",
             url:"<%=basePath%>/user/userRegister.do",
-            data:{username2:$("#username2").val(),pwd:$("#pwd").val(),pwd2:$("#pwd2").val(),code:$("#index_code").val()},
-            beforeSend:function(){$("#msg2").html("loading...");},            
+            data:{phone:$("#phone").val(),pwd:$("#pwd").val(),yzcode:yzcode},
+            /* beforeSend:function(){$("#msg2").html("loading...");},      */       
             success:function(data){
             //判断输入是否成功，成功则跳转
             if("" == data) {
             $("#registerform").submit();
-            $("#msg2").html("注册成功！");
-            } else {
-             $("#msg2").html(decodeURI(data));            
+           /*  $("#msg2").html("注册成功！"); */
+            } 
+            if(decodeURI(data)=="该手机号已经被注册！"){
+             $("#msg2").html(decodeURI(data)); 
+             $("#msg2").show();         
             }
-           
+            if(decodeURI(data)=="验证码错误！"){
+            $("#msg5").html(decodeURI(data)); 
+             $("#msg5").show(); 
+            }
             }           
          });
      }
   
   //注册初期检查 
   function Check2(){
+  var yzcode = $("#index_code").val();
+  var phone = $("#phone").val();
    var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
-      if($("#username2").val()==""){
+      if($("#phone").val()==""){
           //alert("用户名不能为空");
-          $("#msg2").html("用户名不能为空");
-          $("#username2").focus();
+          $("#msg2").html("手机号不能为空");
+          $("#msg2").show();
+          $("#phone").focus();
           return false;
       }
-    /*   if(! reg.test($("#username").val())){
-          //alert("请输入正确的用户名格式，为邮件地址");
-          $("#msg").html("请输入正确的用户名格式，为邮件地址");
-          $("#username").focus();
-          return false;
-      }
-      */
+      if(!(/^1[3|4|5|7|8]\d{9}$/.test(phone))){
+				$("#msg2").html("手机号码不正确");
+				 $("#msg2").show();
+				return;
+	  }
       if($("#pwd").val()=="")
       {
           //alert("密码不能为空");
-          $("#msg2").html("密码不能为空");
+          $("#msg4").html("密码不能为空");
+          $("#msg4").show();
           $("#pwd").focus();
           return false;
       }
-      if($("#pwd").val()!=$("#pwd2").val())
-      {
-          $("#msg2").html("两次密码输入不一致");
-          $("#pwd2").focus();
-          return false;
-      }
+      if($("#pwd").val().length<6){
+			$("#msg4").html("密码为6-16位");
+			$("#msg4").show();
+				return;
+		}
+	  if($("#pwd").val().length>16){
+			$("#msg4").html("密码为6-16位");
+			$("#msg4").show();
+				return;
+		}
+		
+	if(yzcode==""){
+		$("#msg5").html("验证码不能为空");
+		$("#msg5").show();
+			return;
+		}
+		if(yzcode.length<6){
+			$("#msg5").html("验证码格式不正确");
+			$("#msg5").show();
+			return;
+		}
+			
+	if($("#sends").val()=="重新发送验证码"){
+		$("#msg5").html("验证码过期，请重新发送");
+			$("#msg5").show();
+	}	
+	
      return true;
   }
   /* function play(counseId){
@@ -228,7 +269,6 @@ function kc_first(){
 							<div class="l1_1"><h3 class="STYLE4">服务器</h3></div>
 							<ul class="jjz">
 								<li><a href="/">linux</a><span class="ml10 mr10">/</span></li>
-								
 							</ul>
 						</div>
 					</dd>
@@ -535,6 +575,102 @@ jQuery(document).ready(function($) {
 	})
 
 })
+
+function ss(){
+		var phone = $("#phone").val();
+		if(phone==""){
+			$("#msg2").html("手机号不能为空");
+			$("#msg2").show();
+		/* $("#auto-id-1474190060396").html("<img src='images/false.png' style='margin-right: 10px; vertical-align: middle;' />手机号不能为空"); */
+		return;
+		}
+		if(!(/^1[3|4|5|7|8]\d{9}$/.test(phone))){
+		$("#msg2").html("手机号码不正确");
+		$("#msg2").show();
+		}		
+		else{
+		$("#msg2").hide();
+		}
+	}
+	
+function ss1(){
+		var password = $("#pwd").val();
+		if(password==""){
+		$("#msg4").html("密码不能为空");
+		$("#msg4").show();
+		return;
+		}
+		if(password.length<6){
+				$("#msg4").html("密码为6-16位");
+				$("#msg4").show();
+				return;
+		}
+		if(password.length>16){
+			$("#msg4").html("密码为6-16位");
+			$("#msg4").show();
+				return;
+		}
+		else{
+			$("#msg4").hide();
+		}
+	}
+	
+function SetRemainTime() {
+		if (curCount == 0) {                
+			window.clearInterval(InterValObj);// 停止计时器
+			$("#sends").removeAttr("disabled");// 启用按钮
+			$("#sends").css("background-color","rgb(240,240,240)");
+			$("#sends").val("重新发送验证码");
+		}else {
+			curCount--;
+			$("#sends").val("剩余" + curCount + "秒");
+		}
+	}	
+	
+var InterValObj; //timer变量，控制时间
+	var count = 120; //间隔函数，1秒执行
+	var curCount;//当前剩余秒数
+	
+function send(){
+		var phone = $("#phone").val();
+		if(phone==""){
+		$("#msg2").html("手机号不能为空");
+		$("#msg2").show();
+		return;
+		}
+		if(!(/^1[3|4|5|7|8]\d{9}$/.test(phone))){
+			$("#msg2").html("手机号输入不正确");
+			$("#msg2").show();
+				return;
+		}
+		curCount = count;
+		$("#sends").attr("disabled","true");
+		$("#sends").css("background-color","gray");
+		$("#sends").val("剩余" + curCount + "秒");
+		InterValObj = window.setInterval(SetRemainTime, 1000); // 启动计时器，1秒执行一次
+		$.ajax({
+			type:"POST",
+			url:"<%=basePath%>note/getCode.do?phone="+phone,
+			success:function(data){
+			}
+		})
+	}	
+	
+	function op(){
+		var se=document.getElementById("pwd")
+		var sf=document.getElementById("sf")
+		var sf2=document.getElementById("sf2")
+		sf2.style.display="block";
+		sf.style.display="none";
+		se.type="text";
+	}function ops(){
+		var se=document.getElementById("pwd")
+		var sf2=document.getElementById("sf")
+		var sf2=document.getElementById("sf2")
+		sf.style.display="block";
+		sf2.style.display="none";
+		se.type="password";
+	}	
 </SCRIPT>
 <style type="text/css">
 <!--
@@ -558,7 +694,7 @@ jQuery(document).ready(function($) {
 }
 .STYLE4 {font-size: 15px;color:#f60}
 -->
-body, button, input, select, textarea, h1, h2, h3, h4, h5, h6 {
+body, button, select, textarea, h1, h2, h3, h4, h5, h6 {
     font: 12px/1 "微软雅黑","Microsoft Yahei",arial,simhei;
 }
 
@@ -590,6 +726,7 @@ a:hover {
     color: #14191e;
     line-height: 10px;
 }
+.psj,.psj3,.psj2{font-size: 12px;display:none;}
 </style>
 
 </head>
@@ -598,7 +735,7 @@ a:hover {
 <input type="hidden" name="counseId" id="counseId"/>
 </form> -->
 <div id="bg"></div>
-<div class="theme-popover">
+<%-- <div class="theme-popover">
      <div class="theme-poptit">
           <a href="javascript:;" title="关闭" class="close">×</a>
           <h3>登录	/ <a style="color:black;" class="reg" href="javascript:;">没有帐号去注册</a></h3>
@@ -623,15 +760,84 @@ a:hover {
            <form class="theme-signin" id="registerform" name="registerform" action="user/okRegister.do" method="post">
                 <ol>
                      <li><h4  ><font id="msg2" color="red">你必须先注册！</font></h4></li>
-                     <li><strong>用户名：</strong><input class="ipt" type="text" id="username2" name="username2" value="" size="20" /></li>
-                     <li><strong>密码：</strong><input class="ipt" type="password" id="pwd" name="pwd" value="" size="20" /></li>
-                     <li><strong>重复密码：</strong><input class="ipt" type="password" id="pwd2" name="pwd2" value="" size="20" /></li>
+                     <li><strong>手机号：</strong><input onblur="ss()" class="ipt" maxlength="20" size="20" placeholder="11位手机号" id="phone" name="phone" type="text"/></li>
+                    <!-- <li><strong>用户名：</strong><input class="ipt" type="text" id="username2" name="username2" value="" size="20" /></li> -->
+                     <li><strong>密码：</strong><input onblur="ss1()" id="password" class="ipt" placeholder="6-16位密码，区分大小写" size="20" id="inpt-pw" name="pwd" type="password"/></li>
+                     <!-- <li><strong>密码：</strong><input class="ipt" type="password" id="pwd" name="pwd" value="" size="20" /></li> -->
+                     <!-- <li><strong>重复密码：</strong><input class="ipt" type="password" id="pwd2" name="pwd2" value="" size="20" /></li> -->
                      <li>
-						 <strong>验证码：</strong><input class="ipt" id="index_code" style="width: 85px" name="code" type="text" />
+                     	<strong>验证码：</strong><input class="ipt" maxlength="6" placeholder="输入短信验证码" style="width: 85px" id="index_code" name="code" type="text" style="width: 149px"/>
+						<!--  <strong>验证码：</strong><input class="ipt" id="index_code" style="width: 85px" name="code" type="text" /> -->
 						 <!-- <img src="images/verifycode.png" style="vertical-align:middle;"> -->
-						  <img id="imgObj" alt="" src="<%=basePath%>code.do" onclick="changeImg()" style="vertical-align:middle;"/>
+						<input type="button" id="sends" onclick="send()" value="获取验证码"/>
+						<img id="imgObj" alt="" src="<%=basePath%>code.do" onclick="changeImg()" style="vertical-align:middle;"/>
 					 </li>
                      <li><input class="btn btn-primary"  id="registerButton" type="button" name="button" value=" 注 册 " /></li>
+                </ol>
+           </form>
+     </div>
+</div> --%>
+<div class="theme-popover">
+     <div class="theme-poptit">
+          <a href="javascript:;" title="关闭" class="close">×</a>
+          <h3>登录	/ <a style="color:black;" class="reg" href="javascript:;">没有帐号去注册</a></h3>
+     </div>
+     <div class="theme-popbod dform">
+           <form class="theme-signin" name="loginform" id="formid" action="user/get.do" method="post">
+                <ol>
+                     <li>
+						<input id="username" class="ipt" type="text" placeholder="请输入登录用户名/手机号" name="username" value="" size="20" />
+						<p style="color:red;margin: 10px 0" id="msg1" class="psj">请输入正确的用户名或手机号</p>
+					 </li>
+                     <li>
+						<input class="ipt" type="password" id="pass" name="password" placeholder="6-16位密码，区分大小写，不能用空格" value="" size="20" />
+						<p style="color:red; margin: 10px 0" class="psj2" id="msg3">密码错误请重新输入</p>
+					 </li>
+					 <li>
+						<label style="color: #787d82;"><input checked="checked" type="checkbox" class="fe"/>下次自动登录</label>
+						<a href="javascript:;" class="fog" target="_blank">忘记密码 </a>
+					 </li>
+                     <li><input id="loginButton" class="btn btn-primary" type="button" name="button" value=" 登 录 " /></li>
+					 <li>
+						<p>
+							<span class="l " style="color:#666">其他方式登录</span>
+							<div class="dsl">
+								<a class="j-wx" target="_self"></a>
+								<a class="j-wb" target="_self"></a>
+								<a class="j-qq" target="_self"></a>
+							</div>
+						</p>
+					 </li>
+                </ol>
+           </form>
+     </div>
+</div>
+<div class="theme-popover2">
+     <div class="theme-poptit2">
+          <a href="javascript:;" title="关闭" class="close2">×</a>
+          <h3>注册	/ <a style="color:black;" class="theme-login" href="javascript:;">已有账号去登录</a></h3>
+     </div>
+     <div class="theme-popbod dform">
+           <form class="theme-signin" id="registerform" name="registerform" action="user/okRegister.do" method="post">
+                <ol>
+                     <li>
+						<input class="ipt" type="text" placeholder="请输入注册手机号"  onblur="ss()" id="phone" name="phone" value="" size="20" />
+						<p style="color:red; margin: 10px 0" class="psj3" id="msg2">请输入正确的手机号</p>
+					 </li>
+                     <li>
+						<input class="ipt" onblur="ss1()" id="pwd" name="pwd" type="password" placeholder="6-16位密码，区分大小写" name="pwd" value="" size="20" />
+						<a id="sf"  style="color: #787d82;float:right;margin-top:5px;" href="javascript:op();">显示密码</a>
+						<a id="sf2" href="javascript:ops();"  style="color: #787d82;float:right;margin-top:5px;display:none;">隐藏密码</a>
+						<div style="clear:both;"></div>
+						<p id="msg4" style="color:red;margin: -10px 0" class="psj3">请重新输入</p>
+					</li>
+                     <li>
+						<input class="ipt" placeholder="手机动态码" type="" maxlength="6" name="code" style="width: 130px;" size="7" id="index_code"/>
+						<input style="width: 131px;height: 39px;border: 0;" id="sends" onclick="send()" value="获取验证码" type="button">
+						<div style="clear:both;"></div>
+						<p id="msg5" style="color:red;margin: 10px 0" class="psj3">请重新输入</p>
+					 </li>
+                     <li><input class="btn btn-primary" id="registerButton" type="button" name="button" value=" 注 册 " /></li>
                 </ol>
            </form>
      </div>

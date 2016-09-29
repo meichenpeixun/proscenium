@@ -26,4 +26,6 @@ public interface UserDao<T> {
 	public void appendUser(User user);				//添加用户
 	
 	public void updateLoginInfo(User user);		//修改登录信息
+	
+	public void updatePassword(User user);		//修改密码
 }

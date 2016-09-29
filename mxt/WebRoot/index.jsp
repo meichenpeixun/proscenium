@@ -245,7 +245,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 	if($("#sends").val()=="重新发送验证码"){
 		$("#msg5").html("验证码过期，请重新发送");
-			$("#msg5").show();
+		$("#msg5").show();
+		return;
 	}	
 	
      return true;
@@ -786,16 +787,16 @@ a:hover {
            <form class="theme-signin" name="loginform" id="formid" action="user/get.do" method="post">
                 <ol>
                      <li>
-						<input id="username" class="ipt" type="text" placeholder="请输入登录用户名/手机号" name="username" value="" size="20" />
+						<input id="username" class="ipt" type="text" maxlength="37" placeholder="请输入登录用户名/手机号" name="username" value="" size="20" />
 						<p style="color:red;margin: 10px 0" id="msg1" class="psj">请输入正确的用户名或手机号</p>
 					 </li>
                      <li>
-						<input class="ipt" type="password" id="pass" name="password" placeholder="6-16位密码，区分大小写，不能用空格" value="" size="20" />
+						<input class="ipt" type="password" id="pass" maxlength="16" name="password" placeholder="6-16位密码，区分大小写，不能用空格" value="" size="20" />
 						<p style="color:red; margin: 10px 0" class="psj2" id="msg3">密码错误请重新输入</p>
 					 </li>
 					 <li>
 						<label style="color: #787d82;"><input checked="checked" type="checkbox" class="fe"/>下次自动登录</label>
-						<a href="javascript:;" class="fog" target="_blank">忘记密码 </a>
+						<a href="fog/index.jsp" class="fog" >忘记密码 </a>
 					 </li>
                      <li><input id="loginButton" class="btn btn-primary" type="button" name="button" value=" 登 录 " /></li>
 					 <li>
@@ -821,11 +822,11 @@ a:hover {
            <form class="theme-signin" id="registerform" name="registerform" action="user/okRegister.do" method="post">
                 <ol>
                      <li>
-						<input class="ipt" type="text" placeholder="请输入注册手机号"  onblur="ss()" id="phone" name="phone" value="" size="20" />
+						<input class="ipt" type="text" placeholder="请输入注册手机号" maxlength="11"  onblur="ss()" id="phone" name="phone" value="" size="20" />
 						<p style="color:red; margin: 10px 0" class="psj3" id="msg2">请输入正确的手机号</p>
 					 </li>
                      <li>
-						<input class="ipt" onblur="ss1()" id="pwd" name="pwd" type="password" placeholder="6-16位密码，区分大小写" name="pwd" value="" size="20" />
+						<input class="ipt" onblur="ss1()" id="pwd" name="pwd" type="password" maxlength="16" placeholder="6-16位密码，区分大小写" name="pwd" value="" size="20" />
 						<a id="sf"  style="color: #787d82;float:right;margin-top:5px;" href="javascript:op();">显示密码</a>
 						<a id="sf2" href="javascript:ops();"  style="color: #787d82;float:right;margin-top:5px;display:none;">隐藏密码</a>
 						<div style="clear:both;"></div>

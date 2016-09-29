@@ -32,6 +32,7 @@ public class User implements Serializable{
        private Date lastlogintime;	//最后登录时间
        private String lastUpdatePerson;	//最后修改人
        private String ip;		//登录ip
+       private Date lastUpdateTime;
 	public Integer getUserid() {
 		return userid;
 	}
@@ -156,6 +157,12 @@ public class User implements Serializable{
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public Date getLastUpdateTime() {
+		return lastUpdateTime;
+	}
+	public void setLastUpdateTime(Date lastUpdateTime) {
+		this.lastUpdateTime = lastUpdateTime;
 	}
 	public User(Integer userid, String username, String password,
 			String idnumber, String fullname, String email, String phone,

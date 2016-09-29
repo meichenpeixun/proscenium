@@ -75,5 +75,12 @@ public class UserBizImpl<T extends User> implements UserBiz<T> {
 	public void updateLoginInfo(User user){
 		dao.updateLoginInfo(user);
 	}
+	
+	/**
+	 * 修改密码
+	 */
+	public void updatePassword(User user){
+		dao.updatePassword(user);
+	}
 }
 

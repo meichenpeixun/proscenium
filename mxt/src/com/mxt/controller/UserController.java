@@ -156,6 +156,57 @@ public class UserController extends BaseController {
 	   System.out.println(restr);
 	   return restr;   
    }
+   
+   @RequestMapping("/verify")
+   public void verify(String phone,String yzcode,Model model) throws IOException{
+	   User user = biz.findUserByPhone(phone);
+	   if(user == null){
+		   response.setContentType("text/html;charset=UTF-8");
+		   response.getWriter().write("该手机号未被注册");
+		   response.getWriter().flush();
+		   response.getWriter().close();
+	   }
+	   if(!yzcode.equalsIgnoreCase((String)request.getSession().getAttribute("code"))){
+		   response.setContentType("text/html;charset=UTF-8");
+		   response.getWriter().write("验证码不正确");
+		   response.getWriter().flush();
+		   response.getWriter().close();
+	   }
+	   else{
+		   response.setContentType("text/html;charset=UTF-8");
+		   response.getWriter().write("");
+		   response.getWriter().flush();
+		   response.getWriter().close();
+	   }
+   }
+   
+   @RequestMapping("/verifyPhone")
+   public void verifyPhone(String phone,String yzcode,Model model) throws IOException{
+	   if(!yzcode.equalsIgnoreCase((String)request.getSession().getAttribute(phone))){
+		   response.setContentType("text/html;charset=UTF-8");
+		   response.getWriter().write("验证码不正确");
+		   response.getWriter().flush();
+		   response.getWriter().close();
+	   }
+	   else{
+		   response.setContentType("text/html;charset=UTF-8");
+		   response.getWriter().write("");
+		   response.getWriter().flush();
+		   response.getWriter().close();
+	   }
+   }
+   
+   @RequestMapping("/updatePassword")
+   public void updatePassword(String phone,String pwd,Model model) throws IOException{
+	   User user = biz.findUserByPhone(phone);
+	   String password = Md5Util.strToMD5(pwd);
+	   user.setPassword(password);
+	   Date date = new Date();
+	   user.setLastUpdateTime(date);
+	   user.setPhone(phone);
+	   biz.updatePassword(user);
+   }
+   
    @ExceptionHandler(Exception.class)
    public String exception(Exception e,HttpServletRequest request)
    {	
@@ -163,4 +214,7 @@ public class UserController extends BaseController {
 	   request.setAttribute("exception", e);
 	   return  "/500"; 
    }
+   
+   
+  
 }

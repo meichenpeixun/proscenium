@@ -42,4 +42,7 @@ public interface UserMapper extends SqlMapper{
 	
 	@Update("update web_users set lastlogintime=#{lastlogintime},ip=#{ip} where userid = #{userid}")
 	public void updateLoginInfo(User user);		//修改登录信息
+	
+	@Update("update web_users set password=#{password},lastUpdateTime=#{lastUpdateTime} where phone = #{phone}")
+	public void updatePassword(User user);		//修改密码
 }

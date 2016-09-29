@@ -82,4 +82,11 @@ public class UserDaoImpl<T extends User> implements UserDao<T> {
 		mapper.updateLoginInfo(user);
 	}
 	
+	/**
+	 * 修改密码
+	 */
+	public void updatePassword(User user){
+		mapper.updatePassword(user);
+	}
+	
 }

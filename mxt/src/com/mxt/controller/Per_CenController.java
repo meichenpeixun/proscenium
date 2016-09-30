@@ -383,7 +383,7 @@ public class Per_CenController extends BaseController {
 	    	 				byte[] arr = new byte[is.available()];
 	    	 				ServletContext sctx =session.getServletContext() ;
 	                        //获得保存文件的路径
-	                        String basePath = "/mnt/local/tomcat-proscenium/webapps/mxt/videos";// sctx.getRealPath("/videos");
+	                        String basePath =  sctx.getRealPath("/videos");//"/mnt/local/tomcat-proscenium/webapps/mxt/videos";//
 	                        String videoPicPath = basePath + "/images/counrseIMG"; 
 	    	 				String fileName = new Date().getTime()+".jpg";
 	    	 				File file = new File(videoPicPath,fileName);
@@ -1149,42 +1149,7 @@ public class Per_CenController extends BaseController {
                 	 	 String paramName = item.getFieldName();
                          String paramValue = item.getString();
                          System.out.println("参数名称为:" + paramName + ", 对应的参数值为: " + paramValue);
-                     
-                     /*if(paramName.equals("title")){
-                         video.setTitle(new String(item.getString().getBytes("ISO8859-1"),"UTF-8"));
-                     }
-                     if(paramName.equals("audit")){
-                    	 video.setAudit(0);
-                    	 audit=Integer.valueOf("10");
-                     }
-                     if(paramName.equals("userid")){
-                    	 userid = Integer.valueOf(item.getString());
-                         video.setUserid(Integer.valueOf(item.getString()));
-                     }
-                     if(paramName.equals("videoid")){
-                         video.setVideoid(Integer.valueOf(item.getString()));
-                     }
-                     if(paramName.equals("categorys")){
-                         video.setCategorys(Integer.valueOf(item.getString()));
-                     }
-                     if(paramName.equals("descript")){
-                         video.setDescript(new String(item.getString().getBytes("ISO8859-1"),"UTF-8"));
-                         System.out.println(video.getDescript());
-                     }
-                     if(paramName.equals("tags")){
-                         video.setTags(new String(item.getString().getBytes("ISO8859-1"),"UTF-8"));
-                         System.out.println(video.getTags());
-                     }
-                     if(paramName.equals("coursename")){
-                         video.setCoursename(new String(item.getString().getBytes("ISO8859-1"),"UTF-8"));
-                         System.out.println(video.getCoursename());
-                     }
-                     if(paramName.equals("funid")){
-                         System.out.println(item.getString());
-                     }
-                     if(paramName.equals("video_props")){
-                    	video.setVtypes(Integer.parseInt(item.getString()));
-                     }*/
+                   
                         
                          if(paramName.equals("title")){
                              video.setTitle(new String(item.getString().getBytes("ISO8859-1"),"UTF-8"));
@@ -1620,7 +1585,8 @@ public class Per_CenController extends BaseController {
 							 maxPage = videoCounts/pageSize+1;
 						 }
 		             List<Video>  videos =CenBiz.getVideoBychapterIdAndPage(userid,chapterId,begin,pageSize);
-					 
+					 CounseTable  counse=CenBiz.getCounseBycoursedId(coursedId);
+		             mav.addObject("counse",counse);
 		             mav.addObject("coursedId",coursedId);
 		             mav.addObject("userid", userid);
 		             mav.addObject("page", page);
@@ -1712,6 +1678,100 @@ public class Per_CenController extends BaseController {
 			 CenBiz.delChapterById(c.getChapterId());
 	    	 return null;
 	     } 
+		 
+		 //跳转到上传视频页
+		 @RequestMapping("/sub_uploadV")  
+	     public String sub_uploadV(Integer counseId,Integer userid,Integer chapterId)  throws Exception {
+			 request.setAttribute("counseId", counseId);
+			 request.setAttribute("userid", userid);
+			 request.setAttribute("chapterId", chapterId);
+			 System.out.println("chapterId:"+chapterId);
+	    	 return "forward:/upload.jsp";
+	     } 
+		//批量编辑部分
+			@RequestMapping(value = "/part_kc", method = RequestMethod.POST )
+			public ModelAndView part_kc(Integer videoid,Integer userid,Integer counseId) throws IOException{
+					 ModelAndView mav =new ModelAndView();
+					 
+					 Video vid = CenBiz.getVideoByID(videoid);
+						List<CounseTable> counses=CenBiz.getCounseByUid(userid);
+					    List<Chaptertable> chpters =CenBiz.getChaptersBycoursedId(counseId);
+					    mav.addObject("counses", counses);
+					    mav.addObject("chpters", chpters); 
+					 mav.addObject("vid",vid);
+					 mav.setViewName("/part_kc");
+					 return mav;
+			}
+		
+			 //保存编辑视频
+		    @RequestMapping("/edit_video")
+		    public void edit_video() throws Exception{
+		   
+		        //提供解析时的一些缺省配置
+		        DiskFileItemFactory factory = new DiskFileItemFactory();
+		        
+		        //创建一个解析器,分析InputStream,该解析器会将分析的结果封装成一个FileItem对象的集合
+		        //一个FileItem对象对应一个表单域
+		        factory.setSizeThreshold(2048);
+		        ServletFileUpload sfu = new ServletFileUpload(factory);
+		
+		            Video video = new Video();
+		            CounseTable counse =new CounseTable();
+		            List<FileItem> items = sfu.parseRequest(request);
+		          
+		            for(int i=0; i<items.size(); i++){
+		                FileItem item = items.get(i);
+		                //要区分是上传文件还是普通的表单域
+		                if(item.isFormField()){//isFormField()为true,表示这不是文件上传表单域
+		                    //普通表单域
+		                    String paramName = item.getFieldName();
+		                    String paramValue = item.getString();
+		                    System.out.println("参数名称为:" + paramName + ", 对应的参数值为: " + paramValue);
+		                  
+		                    if(paramName.equals("videoid")){
+		                   	//userid上传者id
+		                        video.setVideoid(Integer.valueOf(paramValue));
+		                    }else if(paramName.equals("title")){
+		                    	video.setTitle(new String(item.getString().getBytes("ISO8859-1"),"UTF-8"));
+		                    }else if(paramName.equals("descript")){
+		                    	video.setDescript(new String(item.getString().getBytes("ISO8859-1"),"UTF-8"));
+		                    }else if(paramName.equals("counsename")){
+		                    	video.setCoursename(new String(item.getString().getBytes("ISO8859-1"),"UTF-8"));
+		                    }else if(paramName.equals("chapterId")){
+		                    	video.setChapterId(Integer.valueOf(paramValue));
+		                    }else if(paramName.equals("tags")){
+		                    	video.setTags(new String(item.getString().getBytes("ISO8859-1"),"UTF-8"));
+		                    }else if(paramName.equals("identity")){
+		                    	video.setVtypes(Integer.valueOf(paramValue));
+		                    }
+		                }else{
+		                	 //字节图片信息
+		                	 String str = new String(item.getName().getBytes("gbk"),"utf-8");
+		                	 if("".equals(str)||str==null){
+		                     }else{
+		     					InputStream is = item.getInputStream();
+		    	 				byte[] arr = new byte[is.available()];
+		    	 				ServletContext sctx =session.getServletContext() ;
+		                        //获得保存文件的路径
+		                        String basePath = sctx.getRealPath("/videos"); //"/mnt/local/tomcat-proscenium/webapps/mxt/videos";//
+		                        String videoPicPath = basePath + "/images"; 
+		    	 				String fileName = new Date().getTime()+".jpg";
+		    	 				File file = new File(videoPicPath,fileName);
+		    	 				OutputStream os = new FileOutputStream(file);
+		    	 				is.read(arr);
+		    	 				os.write(arr);
+		    	 				os.flush();
+		    	 				os.close();
+		    	 				is.close();
+		                        video.setScreenshotpath("videos/images/"+fileName);	 
+		                     }
+		                	
+		                }
+		            }
+		            CenBiz.updateVideo(video);
+
+		    }
+			
 		 @ExceptionHandler(Exception.class)
 	    public String exception(Exception e,HttpServletRequest request)
 		{

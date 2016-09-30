@@ -64,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				     else
 				     {
 				     
-				      window.location="<%=basePath%>/upload.jsp";
+				      window.location="<%=basePath%>batchvideo/cjkc.do";
 				     }
   
   }

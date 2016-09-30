@@ -75,9 +75,12 @@ public class CenSqls {
 		 Video video = (Video)parameters.get("video");
 		 System.out.println(video.getDescript());
 		 //"update  web_video_upload set  title=#{title},screenshotpath=#{screenshotpath},descript=#{descript},categorys=#{categorys},coursename=#{coursename},tags=#{tags} where userid = #{userid} and title=#{filename}"
-	        String sql = "update  web_video_upload set audit="+video.getAudit()+",vtypes="+video.getVtypes()+", title='"+video.getTitle()+"',descript='"+video.getDescript()+"',categorys="+video.getCategorys()+",coursename='"+video.getCoursename()+"',tags='"+video.getTags()+"',chapterId="+video.getChapterId()+"";
+	        String sql = "update  web_video_upload set vtypes="+video.getVtypes()+", title='"+video.getTitle()+"',descript='"+video.getDescript()+"',categorys="+video.getCategorys()+",coursename='"+video.getCoursename()+"',tags='"+video.getTags()+"',chapterId="+video.getChapterId()+"";
 	        if(video.getScreenshotpath()!=null&&""!=video.getScreenshotpath()){
 	        	sql+=" ,screenshotpath='"+video.getScreenshotpath()+"'";
+	        }
+	        if(video.getAudit()!=null){
+	        	sql+=" ,audit="+video.getAudit();
 	        }
 	        sql+=" where videoid = "+video.getVideoid();
 	        System.out.println(sql);

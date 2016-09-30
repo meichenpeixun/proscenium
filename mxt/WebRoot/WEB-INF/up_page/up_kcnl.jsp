@@ -26,6 +26,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<script src="js/jquery-1.10.2.min.js"></script>
 		<script src="js/jquery.searchableSelect.js"></script>
 		<script type="text/javascript">
+		function touplaod(){
+			var chapterId= $('#mySelect option:selected').val();
+			$("#chapterId_addV").val(chapterId);
+			$("#sub_uploadV").submit();
+		}
 		function playVe(videoid){
 			$("#videoid2").val(videoid); 		
 	 		$("#playV").submit();
@@ -294,6 +299,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 		</script>
 		<style type="text/css">
+		    .button{color: #ffffff;background-color: #ff9600;min-width: 60px;display: inline-block;_width: 60px;padding: 4px 9px;margin-left:20px;font-size: 15px;border-radius: 3px;float: right;}
+			.selkc a:hover{color:white;}
+			.ico-pass{
+			width: 12px;height: 12px;
+			display: inline-block;zoom: 1;vertical-align: middle;background: transparent url(images/icon_up.png) no-repeat;
+			background-position: -16px -16px;
+			}
+		    
 			.ist{margin:10px 5px 10px 0;width:20px;height:20px;vertical-align:middle;}
 			.btn2{margin-top:10px;background:#ff9600;padding:2px 12px;border:0px;color:white;}
 			.dateTable_upload .m_check {
@@ -402,6 +415,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}.kctj ul li label {
 			line-height: 30px;
 			cursor: pointer;
+		}.qdo2{
+			position: relative;
+			height: 50px;
+			padding-top: 16px;
+			border-top: 1px solid #e0e0e0;
+			background: #f4f4f4;
+			z-index: 2;
+			text-align: center;
+			margin-top: 35px;
 		}
 		</style>
 	</head>
@@ -418,7 +440,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   <input type="hidden" name="coursedId"  value="${counse.coursedId}"/>
 	   <input type="hidden" name="videoid" id="videoid" value="" />
 	     <input type="hidden" name="chapterId" id="chapterId_V" value="" />
+	   </form>
 	   
+	    <form action="<%=basePath%>per_cen/sub_uploadV.do" id="sub_uploadV" method="post">
+	   <input type="hidden" name="userid"  value="${userid}" />
+	   <input type="hidden" name="counseId"  value="${counse.coursedId}" />
+	   <input type="hidden" name="chapterId"  id="chapterId_addV" value=""/>
 	   </form>
 		<div class="header">
 			<div class="h-wb">
@@ -478,7 +505,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<li style="background:url(u/images/zuye.png) no-repeat 5px 20px;"><a href="<%=basePath%>pcenter.jsp">会员主页</a><img class="fr"style="margin:23px 10px;" src="u/images/sj.png"></li>
 					<li style="background:url(u/images/gr.png) no-repeat 5px 20px;"><a href="javascript:;">个人认证</a><img class="fr"style="margin:23px 10px;" src="u/images/sj.png"></li><!--<%=basePath%>per_cen/per_zlws.do  -->
 					<!--<li style="background:url(u/images/tea.png) no-repeat 5px 20px; "><a style="color:#ff6600;">我是讲师</a></li>-->
-					<li style="background:url(u/images/upload.png) no-repeat 5px 20px;"><a href="<%=basePath%>upload.jsp">上传视频</a><img class="fr"style="margin:23px 10px;" src="u/images/sj.png"></li>
+					<%-- <li style="background:url(u/images/upload.png) no-repeat 5px 20px;"><a href="<%=basePath%>upload.jsp">上传视频</a><img class="fr"style="margin:23px 10px;" src="u/images/sj.png"></li> --%>
 					<li style="background:url(u/images/ysc.png) no-repeat 5px 15px;"><a href="javascript:;" onclick="havad_ups()">已上传视频</a><img class="fr"style="margin:23px 10px;" src="u/images/sj.png"></li>
 					<li style="background:url(u/images/kecng.png) no-repeat 5px 15px;"><a href="javascript:;" onclick="mycounses(${user.userid},1)">我的课程</a><img class="fr"style="margin:23px 10px;" src="u/images/sj.png"></li>
 					<!--<li style="background:url(u/images/xuy.png) no-repeat 5px 20px;"><a style="color:#ff6600;">我是学员</a></li>-->
@@ -530,12 +557,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 					<%
 					CounseTable counse =(CounseTable)request.getAttribute("counse");
+					if(counse!=null){
 					String  title =counse.getCouseTitle();
 					  String  neTitle="";
 					if(title.length()>10){
 							neTitle =title.substring(0, 10)+"...";  
 					}else{
 						neTitle=title;
+					}
 					}
 							%>
 						
@@ -549,7 +578,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			            </c:choose>
 					<div class="cover_data"> <span class="item item_date">${counse.createTime} 创建</span> <span class="item item_nums"><i class="icon_play"></i>0</span> </div> 
 					<div class="cover_option">
-						<a href="javascript:op();" class="btn_normal _add_video">+添加视频</a>
+						
 						<a href="javascript:;" class="btn_normal _edit_cover" onclick="editCourseByVID(${userid},${counse.coursedId})">编辑</a> 
 						<a href="javascript:;"  onclick="delCounseByid(${userid},${counse.coursedId})" class="btn_normal _del_cover">删除</a> 
 					</div>
@@ -559,7 +588,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<option value="${chapter.chapterId}">${chapter.chapterName}</option>
 						</c:forEach>
 						</select>
+						
 					</div> 
+				</div>
+				<div>
+				<div style="float: right;"><button class="btn2" onclick="javascript:op();">+添加视频</button></div>
 				</div>
 			</div>
             <ul class="video_list">
@@ -766,10 +799,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div id="fc" class="mod_pop pop_up_fixed sp1">
 				<!--<iframe src="about:blank" class="iframe_mask_pop" frameborder="0"></iframe>-->
 				<div class="mod_pop_hd" style="position:relative; z-index:101;"> <h3></h3> <a href="javascript:close();" class="mod_pop_close _close"></a> </div>
-				<div style="margin-left:15px;">
+				<div class="selkc" style="margin:0px 0px 15px 15px;width: 550px;">
 						<h3 class="ha">请选择视频：</h3>
+						<a href="javascript:;" title="上传视频" class="button" onclick="touplaod()"><i class="ico-pass"></i>&nbsp;上传视频</a>
 				</div>
-				<div class="picsel" style="max-height: 320px;min-height:320px;overflow-y:auto;overflow-x: hidden;clear:both;">
+				<div class="picsel" style="max-height: 400px;min-height:400px;overflow-y:auto;overflow-x: hidden;clear:both;">
 					<ul>
 					<c:forEach items="${Allvideos}" var="v">
 					  <li>
@@ -781,7 +815,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					  </c:forEach>
 					</ul>
 				</div>
-				<div class="qdo">
+				<div class="qdo2">
 					<a href="javascript:;" onclick="addVideos()"><span class="qd">确定</span></a>
 					<a href="javascript:close();" target="_self"><span class="qx">取消</span></a>
 				</div>

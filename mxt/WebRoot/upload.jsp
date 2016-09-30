@@ -9,14 +9,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <head>
    <base href="<%=basePath%>">
 		<title>上传视频</title>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
-		<link href="u/css/st.css" type="text/css" rel="stylesheet">
+		<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<link href="u/css/st.css" type="text/css" rel="stylesheet">
 		<script type="text/javascript" src="js/jf.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/css.css" />
+		<script src="js/jquery.min.js" type="text/javascript"></script>
 		<link href="bootcss/bootstrap.css" type="text/css" rel="stylesheet">
-		<script type="text/javascript" src="js/jquery-1.7.min.js"></script>
 		<script type="text/javascript">
 		jQuery(document).ready(function($) {
 			 window.scrollTo(0,190);
@@ -31,6 +33,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			        type: "POST",  
 			        url: "per_cen/up_kcj.do",  
 			        data: {userid:userid,page:page},
+			        async:false,
+			        dataType: "html",  
+			        success:function(data){
+		             $("#mainr_fr").html(data);
+					}
+				}); 
+		      }
+			 function part_xjkc(userid){
+		    	  var userid =userid;
+			     $.ajax({  
+			        type: "POST",  
+			        url: "<%=basePath%>/per_cen/up_xjkc.do",  
+			        data: {userid:userid},
 			        async:false,
 			        dataType: "html",  
 			        success:function(data){
@@ -128,7 +143,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<li style="background:url(u/images/zuye.png) no-repeat 5px 20px;"><a href="<%=basePath%>pcenter.jsp">会员主页</a><img class="fr"style="margin:23px 10px;" src="u/images/sj.png"></li>
 					<li style="background:url(u/images/gr.png) no-repeat 5px 20px;"><a href="javascript:;">个人认证</a><img class="fr"style="margin:23px 10px;" src="u/images/sj.png"></li><!--<%=basePath%>per_cen/per_zlws.do  -->
 					<!--<li style="background:url(u/images/tea.png) no-repeat 5px 20px; "><a style="color:#ff6600;">我是讲师</a></li>-->
-					<li style="background:url(u/images/upload.png) no-repeat 5px 20px;"><a href="<%=basePath%>upload.jsp">上传视频</a><img class="fr"style="margin:23px 10px;" src="u/images/sj.png"></li>
+					<%-- <li style="background:url(u/images/upload.png) no-repeat 5px 20px;"><a href="<%=basePath%>upload.jsp">上传视频</a><img class="fr"style="margin:23px 10px;" src="u/images/sj.png"></li> --%>
 					<li style="background:url(u/images/ysc.png) no-repeat 5px 15px;"><a href="javascript:;" onclick="havad_ups()">已上传视频</a><img class="fr"style="margin:23px 10px;" src="u/images/sj.png"></li>
 					<li style="background:url(u/images/kecng.png) no-repeat 5px 15px;"><a href="javascript:;" onclick="mycounses(${user.userid},1)">我的课程</a><img class="fr"style="margin:23px 10px;" src="u/images/sj.png"></li>
 					<!--<li style="background:url(u/images/xuy.png) no-repeat 5px 20px;"><a style="color:#ff6600;">我是学员</a></li>-->
@@ -217,6 +232,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<form  id='myForm'  action="batchvideo/batchmyloadFile.do"      method="post">
 		 <input type="hidden" name="userid" value="${user.userid}">
 		 <input type="hidden" id="filesize" name="filesize" value="">
+		 <input type="hidden" name="counseId"  value="${counseId}"/>
+	     <input type="hidden" name="chapterId" value="${chapterId}"/>
 		</form>
 		</div>
 		<script type="text/javascript">
@@ -265,6 +282,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	 
     	 var files = document.getElementById("fileupload").files;
     	  var fd = new FormData();
+    	    fd.append("chapterId",${chapterId});
+    	    fd.append("counseId",${counseId});
 	        fd.append("userid",${user.userid});
 	        fd.append("file"+i, files[i]);
 /* 				    	       var formData = new FormData($( "#uploadForm" )[0]);  
@@ -375,6 +394,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  
 			 }
         
+        
+          function form_kc_sub(userid,coursedId){
+       	   $("#userid").val(userid);
+       	  $("#coursedId").val(coursedId);
+       		$("#form_kc").submit();
+         }
   </script>
 	</body>
 </html>

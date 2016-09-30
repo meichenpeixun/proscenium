@@ -1,4 +1,27 @@
 @charset "utf-8";
+.del_msg{
+						display:none;
+						text-align:center;
+						line-height:40px;
+						font-size:18px;
+						color:#ffffff;
+						border-radius:3px;
+						background-color:#f9a007;
+						background-repeat:repeat-x;
+						/*border:2px solid #06F;*/
+						z-index:2;
+						width: 120px;
+						height: 40px;
+						top:18%;/*FF IE7*/
+						margin-left:44%!important;/*FF IE7 */
+						margin-top:100px!important;/*FF IE7*/
+						position:fixed!important;/*FF IE7*/
+						position:absolute;/*IE6*/
+						_top:       expression(eval(document.compatMode &&
+						document.compatMode=='CSS1Compat') ?
+						documentElement.scrollTop + (document.documentElement.clientHeight-this.offsetHeight)/2 :/*IE6*/
+						document.body.scrollTop + (document.body.clientHeight - this.clientHeight)/2);/*IE5 IE5.5*/
+					}
 body,h1,h2,h3,h4,h5,h6,p,ul,ol,li,form,img,dl,dt,dd,table,th,td,blockquote,fieldset,strong,label,em{margin:0;padding:0;border:0;}
 ul,ol,li{list-style:none;}
 .barline{

@@ -34,7 +34,7 @@ public interface VideoMapper extends SqlMapper{
 	
 	@Select("SELECT a.videoid,a.audit,a.categorys,a.coursename,a.descript,a.filename,a.screenshotpath,a.tags,a.title,a.uptime,a.videopath,a.vtypes ,b.userid,b.username,c.playnumber,c.authority,c.clicknumber,c.commnumber,c.praisenumber,c.sharenumber,c.stepnumber FROM web_video_upload AS a LEFT JOIN web_video_comment  as c on a.videoid = c.videoid LEFT JOIN web_users AS b ON a.userid =b.userid where a.videoid = #{id}")  
 	public Video queryVideoById(Integer id);
-    @Insert("insert web_video_upload (filename,title,videopath,screenshotpath,userid,uptime) values (#{filename},#{title},#{videopath},#{screenshotpath},#{userid},#{uptime})")
+    @Insert("insert web_video_upload (filename,title,videopath,screenshotpath,userid,uptime,tags,descript,chapterId,coursename) values (#{filename},#{title},#{videopath},#{screenshotpath},#{userid},#{uptime},#{tags},#{descript},#{chapterId},#{coursename})")
 	public void saveVideo(Video video);  
     @Select("SELECT a.videoid,a.audit,a.categorys,a.coursename,a.descript,a.filename,a.screenshotpath,a.tags,a.title,a.uptime,a.videopath,a.vtypes ,b.userid,b.username,c.playnumber,c.authority,c.clicknumber,c.commnumber,c.praisenumber,c.sharenumber,c.stepnumber FROM web_video_upload AS a LEFT JOIN web_video_comment  as c on a.videoid = c.videoid LEFT JOIN web_users AS b ON a.userid =b.userid where a.deletetype =0 and a.audit=1  order by a.uptime  desc limit #{firstResult},#{maxResult}") //SELECT a.videoid,a.audit,a.categorys,a.coursename,a.descript,a.filename,a.screenshotpath,a.tags,a.title,a.uptime,a.videopath,a.vtypes ,b.userid,b.username,c.playnumber,c.authority,c.clicknumber,c.commnumber,c.praisenumber,c.sharenumber,c.stepnumber FROM web_video_upload AS a LEFT JOIN web_video_comment  as c on a.videoid = c.videoid LEFT JOIN web_users AS b ON a.userid =b.userid 
 	public List<Video> queryALlVideo(@Param("firstResult") int firstResult, @Param("maxResult") int maxResult);
@@ -127,6 +127,10 @@ public interface VideoMapper extends SqlMapper{
 	public void updateCodesTable(CodesTablemp4 codes);
 	@Update("update codestable set status=#{status} where codeid=#{codeid}")
 	public void updateCodesTableflv(CodesTable codes);
+	
+	//查询刚批量上传的视频
+	 @Select("select * from web_video_upload  where deletetype =0 and audit=0 and userid=#{userid} order by uptime desc limit #{filesize}") 
+	public List<Video> findVideosByUidandSize(@Param("userid") Integer userid,@Param("filesize") Integer filesize);
    
     
 	

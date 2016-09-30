@@ -88,6 +88,7 @@ public class BatchVideoController extends BaseController {
          });  
      
             Video video = new Video();
+            CounseTable counse =new CounseTable();
             List<FileItem> items = sfu.parseRequest(request);
             boolean flagflv = false;    //转码成功与否的标记
             String ffmpegpath=session.getServletContext().getRealPath("/tools/ffmpeg.exe") ;//"/usr/local/ffmpeg/bin/./ffmpeg"  session.getServletContext().getRealPath("/tools/ffmpeg.exe")   //转码工具路径
@@ -106,6 +107,15 @@ public class BatchVideoController extends BaseController {
                     if(paramName.equals("userid")){
                    	//userid上传者id
                         video.setUserid(Integer.valueOf(paramValue));
+                    }else if(paramName.equals("counseId")){
+                    //封装课程信息到video
+                       	counse =videoDao.findCounseBycounseId(Integer.valueOf(paramValue));
+                       	video.setDescript(counse.getCouseDes());
+                       	video.setTags(counse.getCouseTag());
+                       	video.setScreenshotpath(counse.getCouseCoverPath());
+                       	video.setCoursename(counse.getCouseTitle());
+                    }else if(paramName.equals("chapterId")){
+                    	video.setChapterId(Integer.valueOf(paramValue));
                     }
                 }else{
                	
@@ -142,7 +152,7 @@ public class BatchVideoController extends BaseController {
                     video.setVideopath(codcFilePath);
                     video.setTitle(item.getName());
                     video.setFilename("videos/" + serialName + ".flv");
-                    video.setScreenshotpath("videos/images/" +serialName + ".jpg");
+                    // video.setScreenshotpath("videos/images/" +serialName + ".jpg");
                     video.setUptime(DateTimeUtil.getStringDate(new Date(), 2));
                     uploadFilepath = uploadFile.getAbsolutePath();
                     //转码
@@ -186,15 +196,29 @@ public class BatchVideoController extends BaseController {
 	    
 	  //用来隐藏表头信息，传递filename和id
 	    @RequestMapping("/batchmyloadFile")
-	    public String myloadFile(Integer userid,Integer filesize) throws Exception{
+	    public String myloadFile(Integer userid,Integer filesize,Integer counseId,Integer chapterId) throws Exception{
 	   	List<CounseTable> counses=videoDao.getCounseByUid(userid);
-	    List<Chaptertable> chpters =videoDao.findChaptersById(Integer.valueOf(counses.get(0).getCoursedId()));
+	    List<Chaptertable> chpters =videoDao.findChaptersById(counseId);
 	   	request.setAttribute("counses", counses);
 	   	request.setAttribute("chpters", chpters);
-	   	//List<Video> videos =videoDao. 
-	   	 return "forward:/editvideo.jsp";
+	 	request.setAttribute("userid",userid);
+	   	request.setAttribute("counseId", counseId);
+	   	List<Video> videos =videoDao.findVideosByUidandSize(userid,filesize);
+		request.setAttribute("videos", videos);
+	   	 return "forward:/edit_video.jsp";
 	    }
     
+	  //跳转到上传视频页
+		 @RequestMapping("/cjkc")  
+	     public String cjkc()  throws Exception {
+			    List<Funs> funs = videoDao.getAllFuns();
+		    	List<Menus> menus=videoDao.getAllMenus();
+		    	request.setAttribute("menus", menus);
+		    	request.setAttribute("funs", funs);
+	    	 return "forward:/WEB-INF/up_page/up_cjkc.jsp";
+	     } 
+	    
+	    
      @ExceptionHandler(Exception.class)
      public String exception(Exception e,HttpServletRequest request)
      {

@@ -555,7 +555,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 							<div class="cs">
 								<div>
-									课程选择：
+									章节选择：
 									<select id="font_size2" name="chapterName"  style="width:246px;height: 31px;"">
 										<option value="${chapter.chapterName}m-x-t${chapter.chapterId}" selected="selected" >${chapter.chapterName}</option>
 									</select><input id="del" type="button" style="cursor: pointer;" value="删 除" onclick="delChapterByChaid()"/><font id="msg6" color="red" size="3">&nbsp;*</font>

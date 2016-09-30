@@ -141,6 +141,8 @@ public interface VideoDao<T> {
 	
 	public void updateCodesTablemp4(CodesTablemp4 codesmp4);
 
+	public List<Video> findVideosByUidandSize(Integer userid, Integer filesize);
+
    
 }
 

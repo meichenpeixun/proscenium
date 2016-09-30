@@ -245,9 +245,9 @@ public class VideoDaoImpl<T extends Video> implements VideoDao<T> {
 		videomapper.updateCodesTableflv(codes);
 	}
 
-	public void updateCodesTableflv(CodesTablemp4 codesmp4) {
+	public List<Video> findVideosByUidandSize(Integer userid, Integer filesize) {
 		// TODO Auto-generated method stub
-		
+		return videomapper.findVideosByUidandSize(userid,filesize);
 	}
 
 

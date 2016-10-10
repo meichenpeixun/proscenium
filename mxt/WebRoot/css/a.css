@@ -1214,7 +1214,11 @@ li.layer-usercard-medal {
   color: #14191e;
   background-color: #ffffff;
   border: 1px solid #98a1a6;
+<<<<<<< HEAD
   height: 20px;
+=======
+  /* height: 20px; */
+>>>>>>> refs/remotes/origin/master
   padding: 9px 9px;
   font-size: 14px;
   line-height: 20px;

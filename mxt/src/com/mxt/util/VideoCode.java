@@ -1,3 +1,4 @@
+
 package com.mxt.util;
 
 import java.io.BufferedReader;
@@ -172,4 +173,3 @@ public class VideoCode {
         return mark;
     }
     
-}

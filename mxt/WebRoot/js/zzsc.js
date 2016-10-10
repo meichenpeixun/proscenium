@@ -16,4 +16,23 @@ $(function(){
 		$(this).css("border-color","#fafafa");
 		$(this).find('p > a').css('color','#666666');
 	});
+<<<<<<< HEAD
 	});
+=======
+	});
+		function op(){
+		var se=document.getElementById("pw")
+		var sf=document.getElementById("sf")
+		var sf2=document.getElementById("sf2")
+		sf2.style.display="block";
+		sf.style.display="none";
+		se.type="text";
+	}function ops(){
+		var se=document.getElementById("pw")
+		var sf2=document.getElementById("sf")
+		var sf2=document.getElementById("sf2")
+		sf.style.display="block";
+		sf2.style.display="none";
+		se.type="password";
+	}
+>>>>>>> refs/remotes/origin/master

@@ -43,6 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <link href="css/default.css" type="text/css" rel="stylesheet">
  <link href="list/style/cores.css" type="text/css" rel="stylesheet">
  <script type="text/javascript" src="js/jquery.min.js"></script>
+<<<<<<< HEAD
  <!--上传视频按钮权限检测  -->
  <script type="text/javascript">
   function  user_power(){
@@ -327,6 +328,457 @@ function TestBlack(TagName){
 						  <img id="imgObj" alt="" src="<%=basePath%>code.do" onclick="changeImg()" style="vertical-align:middle;"/>
 					 </li>
                      <li><input class="btn btn-primary"  id="registerButton" type="button" name="button" value=" 注 册 " /></li>
+=======
+ <script type="text/javascript" src="js/zzsc.js"></script>
+	<link rel="stylesheet" href="css/dl2.css" type="text/css">
+ <!--上传视频按钮权限检测  -->
+ <script type="text/javascript">
+ 
+ function op(){
+		var se=document.getElementById("pwd")
+		var sf=document.getElementById("sf")
+		var sf2=document.getElementById("sf2")
+		sf2.style.display="block";
+		sf.style.display="none";
+		se.type="text";
+	}function ops(){
+		var se=document.getElementById("pwd")
+		var sf2=document.getElementById("sf")
+		var sf2=document.getElementById("sf2")
+		sf.style.display="block";
+		sf2.style.display="none";
+		se.type="password";
+	}
+ 
+  function  user_power(){
+  
+  	//判断用户有没有登录
+		    		 var bool = ${user.username==null||user.username==""};
+				     if(bool)
+				     {
+				     alert("没有登录或者账户已经失效，请您先登录！");
+				   
+						$('.theme-popover-mask').fadeIn(100);
+						$('.theme-popover').slideDown(200);
+						$('.theme-popover-mask2').fadeOut(100);
+						$('.theme-popover2').slideUp(200);
+						$("#bg").css("display","block");
+					
+					$('.theme-poptit .close').click(function(){
+						$('.theme-popover-mask').fadeOut(100);
+						$('.theme-popover').slideUp(200);
+						$("#bg").css("display","none");
+					})
+				     }
+				     else
+				     {
+				     
+				      window.location="<%=basePath%>/upload.jsp";
+				     }
+  
+  }
+ 
+ </script>
+<!-- 验证码 -->
+<script type="text/javascript">
+  function changeImg() {
+    var imgSrc = $("#imgObj");
+    var src = imgSrc.attr("src");
+    imgSrc.attr("src", chgUrl(src));
+  }
+  //时间戳   
+  //为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳   
+  function chgUrl(url) {
+    var timestamp = (new Date()).valueOf();
+    url = url.substring(0, 37);
+    if ((url.indexOf("&") >= 0)) {
+      url = url + "×tamp=" + timestamp;
+    } else {
+      url = url + "?timestamp=" + timestamp;
+    }
+    return url;
+  }
+</script>
+<!-- jquery登录 -->
+ <script language='javascript'>
+ function ss(){
+		var phone = $("#phone").val();
+		if(phone==""){
+			$("#msg2").html("手机号不能为空");
+			$("#msg2").show();
+		/* $("#auto-id-1474190060396").html("<img src='images/false.png' style='margin-right: 10px; vertical-align: middle;' />手机号不能为空"); */
+		return;
+		}
+		if(!(/^1[3|4|5|7|8]\d{9}$/.test(phone))){
+		$("#msg2").html("手机号码不正确");
+		$("#msg2").show();
+		}		
+		else{
+		$("#msg2").hide();
+		}
+	}
+	
+function ss1(){
+		var password = $("#pwd").val();
+		if(password==""){
+		$("#msg4").html("密码不能为空");
+		$("#msg4").show();
+		return;
+		}
+		if(password.length<6){
+				$("#msg4").html("密码为6-16位");
+				$("#msg4").show();
+				return;
+		}
+		if(password.length>16){
+			$("#msg4").html("密码为6-16位");
+			$("#msg4").show();
+				return;
+		}
+		else{
+			$("#msg4").hide();
+		}
+	}
+	
+function SetRemainTime() {
+		if (curCount == 0) {                
+			window.clearInterval(InterValObj);// 停止计时器
+			$("#sends").removeAttr("disabled");// 启用按钮
+			$("#sends").css("background-color","rgb(240,240,240)");
+			$("#sends").val("重新发送验证码");
+		}else {
+			curCount--;
+			$("#sends").val("剩余" + curCount + "秒");
+		}
+	}	
+	
+var InterValObj; //timer变量，控制时间
+	var count = 120; //间隔函数，1秒执行
+	var curCount;//当前剩余秒数
+	
+function send(){
+		var phone = $("#phone").val();
+		if(phone==""){
+		$("#msg2").html("手机号不能为空");
+		$("#msg2").show();
+		return;
+		}
+		if(!(/^1[3|4|5|7|8]\d{9}$/.test(phone))){
+			$("#msg2").html("手机号输入不正确");
+			$("#msg2").show();
+				return;
+		}
+		curCount = count;
+		$("#sends").attr("disabled","true");
+		$("#sends").css("background-color","gray");
+		$("#sends").val("剩余" + curCount + "秒");
+		InterValObj = window.setInterval(SetRemainTime, 1000); // 启动计时器，1秒执行一次
+		$.ajax({
+			type:"POST",
+			url:"<%=basePath%>note/getCode.do?phone="+phone,
+			success:function(data){
+			}
+		})
+	}	
+	
+  $(document).ready(function(){
+      $("#loginButton").click(function(){
+     	$("#msg1").hide();
+      	$("#msg3").hide();
+          Login();
+      });
+  });
+  //登录处理
+  function Login(){
+      if(Check()){
+         LoginSuccess();
+         //alert('成功');
+      }
+  }
+  
+  //登录成功处理
+  function LoginSuccess(){
+        $.ajax({
+            type:"POST",
+            url:"<%=basePath%>/user/userLoginCheck.do",
+            data:{username:$("#username").val(),password:$("#pass").val()},
+           /*  beforeSend:function(){$("#msg1").html("loading...");},    */         
+            success:function(data){
+            //判断输入是否成功，成功则跳转
+            if(""==data) {
+            $("#formid").submit();
+            } 
+            if(data=="用户或手机号不存在"){
+             $("#msg1").html(decodeURI(data));  
+             $("#msg1").show();          
+            }
+           	if(data=="密码错误"){
+           	$("#msg3").html(decodeURI(data));  
+             $("#msg3").show();
+          	}
+            }           
+         });
+     }
+  
+  //初期检查 
+  function Check(){
+   	var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+      if($("#username").val()==""){
+          //alert("用户名不能为空");
+          $("#msg1").html("用户名或手机号不能为空");
+          $("#msg1").show();
+          $("#username").focus();
+          return false;
+      }
+      if($("#pass").val()=="")
+      {
+          //alert("密码不能为空");
+          $("#msg3").html("密码不能为空");
+          $("#msg3").show();
+          $("#pass").focus();
+          return false;
+      }
+     return true;
+  }
+ </script>
+<!-- jquery注册 -->
+<script language='javascript'>
+   $(document).ready(function(){
+      $("#registerButton").click(function(){
+      	$("#msg2").hide();
+      	$("#msg4").hide();
+      	$("#msg5").hide();
+          Register();
+      });
+  });
+  //注册处理
+  function Register(){
+      if(Check2()){
+         RegisterSuccess();
+      }
+  }
+  //注册成功处理
+  function RegisterSuccess(){
+  		var yzcode = $("#index_code").val();
+  		var phone = $("#phone").val();
+        $.ajax({
+            type:"POST",
+            url:"<%=basePath%>/user/userRegister.do",
+            data:{phone:$("#phone").val(),pwd:$("#pwd").val(),yzcode:yzcode},
+            /* beforeSend:function(){$("#msg2").html("loading...");},      */       
+            success:function(data){
+            //判断输入是否成功，成功则跳转
+            if("" == data) {
+            $("#registerform").submit();
+           /*  $("#msg2").html("注册成功！"); */
+            } 
+            if(decodeURI(data)=="该手机号已经被注册！"){
+             $("#msg2").html(decodeURI(data)); 
+             $("#msg2").show();         
+            }
+            if(decodeURI(data)=="验证码错误！"){
+            $("#msg5").html(decodeURI(data)); 
+             $("#msg5").show(); 
+            }
+            }           
+         });
+     }
+  
+  //注册初期检查 
+  function Check2(){
+  var yzcode = $("#index_code").val();
+  var phone = $("#phone").val();
+   var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+      if($("#phone").val()==""){
+          //alert("用户名不能为空");
+          $("#msg2").html("手机号不能为空");
+          $("#msg2").show();
+          $("#phone").focus();
+          return false;
+      }
+      if(!(/^1[3|4|5|7|8]\d{9}$/.test(phone))){
+				$("#msg2").html("手机号码不正确");
+				 $("#msg2").show();
+				return;
+	  }
+      if($("#pwd").val()=="")
+      {
+          //alert("密码不能为空");
+          $("#msg4").html("密码不能为空");
+          $("#msg4").show();
+          $("#pwd").focus();
+          return false;
+      }
+      if($("#pwd").val().length<6){
+			$("#msg4").html("密码为6-16位");
+			$("#msg4").show();
+				return;
+		}
+	  if($("#pwd").val().length>16){
+			$("#msg4").html("密码为6-16位");
+			$("#msg4").show();
+				return;
+		}
+		
+	if(yzcode==""){
+		$("#msg5").html("验证码不能为空");
+		$("#msg5").show();
+			return;
+		}
+		if(yzcode.length<6){
+			$("#msg5").html("验证码格式不正确");
+			$("#msg5").show();
+			return;
+		}
+			
+	if($("#sends").val()=="重新发送验证码"){
+		$("#msg5").html("验证码过期，请重新发送");
+		$("#msg5").show();
+		return;
+	}	
+	
+     return true;
+  }
+ </script>
+ <script type="text/javascript">
+$(function(){
+$(".qqkediv").hover(
+	function(){
+		$(".qqkediv").animate({
+			right:"0"
+		},200);
+	},
+	function(){
+		$(".qqkediv").animate({
+			right:"-80px"
+		},200);
+	}
+);
+
+})
+jQuery(document).ready(function($) {
+	$('.theme-login').click(function(){
+		$('.theme-popover-mask').fadeIn(100);
+		$('.theme-popover').slideDown(200);
+		$('.theme-popover-mask2').fadeOut(100);
+		$('.theme-popover2').slideUp(200);
+		$("#bg").css("display","block");
+		
+	})
+	$('.theme-poptit .close').click(function(){
+		$('.theme-popover-mask').fadeOut(100);
+		$('.theme-popover').slideUp(200);
+		$("#bg").css("display","none");
+	})
+	$('#bg').click(function(){
+		$('.theme-popover-mask').fadeOut(100);
+		$('.theme-popover').slideUp(200);
+		$("#bg").css("display","none");
+	})
+});
+jQuery(document).ready(function($) {
+	$('.reg').click(function(){
+		$('.theme-popover-mask2').fadeIn(100);
+		$('.theme-popover2').slideDown(200);
+		$('.theme-popover-mask').fadeOut(100);
+		$('.theme-popover').slideUp(200);
+		$("#bg").css("display","block");
+	})
+	$('.theme-poptit2 .close2').click(function(){
+		$('.theme-popover-mask2').fadeOut(100);
+		$('.theme-popover2').slideUp(200);
+		$("#bg").css("display","none");
+	})
+	$('#bg').click(function(){
+			$('.theme-popover-mask2').fadeOut(100);
+			$('.theme-popover2').slideUp(200);
+			$("#bg").css("display","none");
+		})
+})
+function TestBlack(TagName){
+			 var obj = document.getElementById(TagName);
+			 if(obj.style.display=="block"){
+			  obj.style.display = "none";
+			 }else{
+			  obj.style.display = "block";
+			 }
+			}
+</SCRIPT>
+<style type="text/css">
+#bg{ display: none;  position: fixed;  top: 0%;  left: 0%;  width: 100%;  height: 100%;  background-color: black;  z-index:1001;  -moz-opacity: 0.7;  opacity:.70;  filter: alpha(opacity=70);}
+	body{
+		background:#edeff0;	
+	}
+	.cen_lx{
+		width:1200px;
+		height:auto;
+		margin:0 auto;
+		background:#FF0000;
+	}
+</style>
+ </head>  
+ <body class="auto-1467597023195-parent">
+  <div class="theme-popover">
+     <div class="theme-poptit">
+          <a href="javascript:;" title="关闭" class="close">×</a>
+          <h3 style="font: 12px/1 瀹嬩綋,Microsoft Yahei,arial,simhei;">登录	/ <a style="color:black;" class="reg" href="javascript:;">没有帐号去注册</a></h3>
+     </div>
+     <div class="theme-popbod dform">
+           <form class="theme-signin" name="loginform" id="formid" action="user/get.do" method="post">
+                <ol>
+                     <li>
+						<input class="ipt"  style="width: 300px;" name="username" type="text" maxlength="37" id="username" placeholder="请输入登录用户名/手机号" name="log" value="" size="20" />
+						<p style="color:red;display: none" id="msg1"  class="psj">请输入正确的邮箱或手机号</p>
+					 </li>
+                     <li>
+						<input class="ipt" style="width: 300px;" id="pass" maxlength="16" name="password"  type="password" placeholder="6-16位密码，区分大小写，不能用空格" value="" size="20" />
+						<p style="color:red;display: none" id="msg3" class="psj2">密码错误请重新输入</p>
+					 </li>
+					 <li>
+						<label style="color: #787d82;"><input checked="checked" type="checkbox" class="fe"/>下次自动登录</label>
+						<a href="fog/index.jsp" class="fog" target="_blank">忘记密码 </a>
+					 </li>
+                     <li><input id="loginButton" class="btn btn-primary" type="button" name="button" value=" 登 录 " /></li>
+					 <li>
+						<p>
+							<span class="" style="color:#666">其他方式登录</span>
+							<div class="dsl">
+								<a class="j-wx" target="_self"></a>
+								<a class="j-wb" target="_self"></a>
+								<a class="j-qq" target="_self"></a>
+							</div>
+						</p>
+					 </li>
+                </ol>
+           </form>
+     </div>
+</div>
+<div class="theme-popover2">
+     <div class="theme-poptit2">
+          <a href="javascript:;" title="关闭" class="close2">×</a>
+          <h3 style="font: 12px/1 瀹嬩綋,Microsoft Yahei,arial,simhei;">注册	/ <a style="color:black;" class="theme-login" href="javascript:;">已有账号去登录</a></h3>
+     </div>
+     <div class="theme-popbod dform">
+           <form class="theme-signin" id="registerform" name="registerform" action="user/okRegister.do"  method="post">
+                <ol>
+                     <li>
+						<input class="ipt" style="width: 300px;" type="text" onblur="ss()" id="phone" maxlength="37" placeholder="请输入注册手机号" name="phone" value="" size="20" />
+						<p style="color:red;display: none" class="psj3" id="msg2">请输入正确的邮箱或手机号</p>
+					 </li>
+                     <li>
+						<input class="ipt" style="width: 300px;" onblur="ss1()" id="pwd" type="password" maxlength="16" placeholder="6-16位密码，区分大小写" name="pwd" value="" size="20" />
+						<a id="sf" style="color: #787d82;float:right;margin-top:5px;" href="javascript:op();">显示密码</a>
+						<a id="sf2" href="javascript:ops();"  style="color: #787d82;float:right;margin-top:5px;display:none;">隐藏密码</a>
+						<div style="clear:both;"></div>
+						<p style="color:red;margin-top: -25px;display: none" class="psj3" id="msg4">请重新输入</p>
+					</li>
+                     <li>
+						<input class="ipt" placeholder="手机动态码" id="index_code" type="" style="width: 130px;" size="7" />
+						 <input class="ipt" style="margin-left:13px;width: 131px;height: 39px;border: 0;font-size:12px;background:rgb(240,240,240);" id="sends" onclick="send()" value="获取验证码" type="button">
+						 <p style="color:red;margin-top: 0px;display: none" class="psj3" id="msg5">请重新输入</p>
+					 </li>
+                     <li><input class="btn btn-primary" id="registerButton" type="button" name="button" value=" 注 册 " /></li>
+>>>>>>> refs/remotes/origin/master
                 </ol>
            </form>
      </div>

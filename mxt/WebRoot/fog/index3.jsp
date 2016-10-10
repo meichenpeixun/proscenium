@@ -17,7 +17,6 @@ var phone = '<%=request.getParameter("phone")%>';
 })
 
 function queren(){
-	alert();
 	var pwd = $("#pwd").val();
 	var pwd1 = $("#pwd1").val();
 	var phone = $("#phone").val();

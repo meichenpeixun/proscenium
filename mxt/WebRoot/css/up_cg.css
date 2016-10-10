@@ -1,13 +1,17 @@
 
 
-.del_msg{
+.del_msg{				
+						z-index:1001;
+	 				    -moz-opacity: 0.5;
+	    				opacity:.50; 
+	    			    filter: alpha(opacity=50);
 						display:none;
 						text-align:center;
 						line-height:40px;
 						font-size:18px;
 						color:#ffffff;
 						border-radius:3px;
-						background-color:#f9a007;
+						background-color:#FF9600;
 						background-repeat:repeat-x;
 						/*border:2px solid #06F;*/
 						z-index:2;

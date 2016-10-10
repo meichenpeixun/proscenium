@@ -293,6 +293,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  
 	 function on_lost_focus(){
 		 var kc_title =$("#kc_title").val();
+		 if(kc_title==''){
+			 $("#msg1").html("标题不能为空!"); 
+			
+		 }else{ 
 		 var userid =${userid};
 		  $.ajax({
 	            type:"POST",
@@ -302,6 +306,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	             $("#msg1").html(decodeURI(data));            
 	            }           
 	         });
+		 }
 	 }
 	  
 	</script>

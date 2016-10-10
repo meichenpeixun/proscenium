@@ -9,16 +9,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <head>
    <base href="<%=basePath%>">
 		<title>上传视频</title>
-		<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
+		
 	<link href="u/css/st.css" type="text/css" rel="stylesheet">
 		<script type="text/javascript" src="js/jf.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/css.css" />
 		<script src="js/jquery.min.js" type="text/javascript"></script>
-		<link href="bootcss/bootstrap.css" type="text/css" rel="stylesheet">
+		<link href="bootcss/bootstrap.css" type="text/css" rel="stylesheet"> 
 		<script type="text/javascript">
 		jQuery(document).ready(function($) {
 			 window.scrollTo(0,190);

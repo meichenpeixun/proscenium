@@ -123,7 +123,7 @@ public class BatchVideoController extends BaseController {
                     System.out.println("$$$上传文件" + item.getName());
                     ServletContext sctx =session.getServletContext() ;
                     //获得保存文件的路径
-                    String basePath =sctx.getRealPath("/videos");//"/mnt/local/tomcat-proscenium/webapps/mxt/videos";            //sctx.getRealPath("/videos");
+                    String basePath ="/mnt/local/tomcat-proscenium/webapps/mxt/videos";//"/mnt/local/tomcat-proscenium/webapps/mxt/videos"sctx.getRealPath("/videos");;            //sctx.getRealPath("/videos");
                     //获得文件名
                     String fileUrl= item.getName();
                     //在某些操作系统上,item.getName()方法会返回文件的完整名称,即包括路径

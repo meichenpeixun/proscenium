@@ -82,14 +82,14 @@ public class VideoCode {
 //            //因此两者均可使用 Process.getInputStream() 方法读取。这使得关联错误消息和相应的输出变得更容易
 //            builder.start();
         	//执行图片截图
-        	Runtime rt = Runtime.getRuntime();  
+        	/*Runtime rt = Runtime.getRuntime();  
         	
         	Process proc2 = rt.exec(pstr.toString());  
         	InputStream stderr2 = proc2.getErrorStream();  
         	InputStreamReader isr2 = new InputStreamReader(stderr2);  
         	BufferedReader br2 = new BufferedReader(isr2);  
         	String line2 = null;  
-        	while ( (line2 = br2.readLine()) != null);  
+        	while ( (line2 = br2.readLine()) != null);  */
         	/*//转flv
              Process proc = rt.exec(vstr.toString());  
 			 InputStream stderr = proc.getErrorStream();  

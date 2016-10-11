@@ -1,0 +1,99 @@
+/*公共类样�?*/
+a:link {text-decoration: none;}
+a:visited {text-decoration: none;}
+a:hover {text-decoration: none;}
+a:active {text-decoration: none;}
+a{color:#555;}
+.php_w960{border: 1px solid #F2F2F2;width: 960px;height: 300px;margin:0 auto;}
+.w960-n{width:960px;height:100%;min-width: 960px;margin:0 auto;}
+.xdl_top-n{height:30px;background:#eaeaea;}
+.xdl_topm-n .xdl_topm_l-n{width:640px;float:left;}
+.xdl_topm_l-n p{line-height:30px;font-size:12px;margin-right:5px;color:#035f99;}
+.xdl_topm-n .xdl_topm_r-n{width:320px;float:left;text-align:right;}
+.xdl_topm_r-n a{color: #666;padding-right: 5px;line-height:30px;}
+.xdl_toubu-n{height:120px;}
+.xdl_header-n .xdl_logo-n{float:left;width:228px;height:100%;}
+.xdl_header-n .xdl_logo-n a img{padding-top:20px;}
+.xdl_header-n .xdl_fenxiao{float:left;margin-top:20px;width:732px;}
+.xdl_header-n .xdl_erweima-n{float:right;width:106px;height:100%;}
+.xdl_header-n .xdl_erweima-n img{padding-top:10px}
+.xdl_fenxiao ul li{width:64px;height:88px;margin-left:-4px;float:left;}
+.xdl_fenxiao ul li a{width:64px;height:88px;color:#303030;font-weight:200;background:url(http://www.lampbrother.net/php/statics/images/fenxiao_moren.png) no-repeat; text-align:center;display:block;font-size:14px;padding-top:13px;line-height:18px;}
+.xdl_fenxiao ul li a:hover{width:64px;height:88px;background:url(http://www.lampbrother.net/php/statics/images/fenxiao_hover.png) no-repeat; text-align:center;display:block;font-size:14px;padding-top:10px;line-height:18px;color:#fff;}
+
+.php_bt{background: /*url("http://www.lampbrother.net/php/statics/images/lamp/php_bt_bg.png");*/#F2F2F2;height: 37px;width: 958px;margin:1px;}
+.php_bt2{/*background: url("http://www.lampbrother.net/php/statics/images/lamp/php_bt2_bg.png");*/height: 29px;width: 960px;border-bottom:1px dotted #E2E2E2;}
+.php_bt h2{color:#3E3E3E;text-show:white;font-size:16px;line-height:37px;margin-left:10px;float:left;}
+.php_bt a{float:right;margin-right:20px;line-height:37px;font-size:12px;color:gray;}
+.php_hover1:hover{background:url(../images/lamp/PHP_bj-2.png) no-repeat;}
+.php_hover1{background:url(../images/lamp/PHP_bj.png) no-repeat;}
+.php_hover2:hover{background:url(../images/lamp/PHP_sh-2.png) no-repeat;}
+.php_hover2{background:url(../images/lamp/PHP_sh.png) no-repeat;}
+.php_hover3:hover{background:url(../images/lamp/PHP_gz-2.jpg) no-repeat;}
+.php_hover3{background:url(../images/lamp/PHP_gz.jpg) no-repeat;}
+.php_hover4:hover{background:url(../images/lamp/PHP_sy-2.jpg) no-repeat;}
+.php_hover4{background:url(../images/lamp/PHP_sy.jpg) no-repeat;}
+/*头部样式*/
+body{color:#555;}
+.top{height:30px;width:100%;background:#eaeaea;line-height:30px;}
+.topm{width:960px;margin:0 auto;height:30px;overflow:hidden;}
+.topm_l{width:460px;float:left;}
+.topm_r{width:500px;float:left;text-align:right;}
+.topm a{color:#035F99;margin-right:5px;}
+.topm_l a{color:#035F99;margin-right:10px;}
+.topm_r a{color:#666;border-right: 1px dotted #666666;padding-right:5px;}
+.topm_r a:hover {color: #FF0000;text-decoration: none;}
+.header{width: 960px;height:100px;margin:0 auto;overflow:hidden;}
+.header_l{width: 245px;height:100px;float: left;}
+.header_l .logo{width: 164px;float: left;}
+.header_l .heaer_xq{width: 280px;height:100px;float: right;}
+.heaer_xq_xq{width: 60px;height: 60px;float: left;margin-top:27px;margin-left: 10px;}
+.heaer_xq_xq a{width:60px; height:60px;}
+
+.header_r{width:400px;height: 60px;float: left;margin-top: 25px;}
+.heaer_tel{float: right;margin-top: 10px;}
+.php_nav {background:url('http://www.lampbrother.net/php/statics/images/lamp/PHP_dh_bg.png');height: 53px;}
+.php_nav ul {display: block;height: 53px;margin: 0 auto;width: 970px;}
+.php_nav li {display: block;float: left;height: 53px;width:auto;}
+.php_nav li span{float: left; }
+.php_nav li a {display: block;font: bold 14px/17px Verdana,Tahoma,'Microsoft Yahei','Simsun';height:49px;text-decoration: none;width:auto;line-height: 49px;float: left;border-right:1px solid #1b6fa3;padding:0 10px!important;padding:0 8px;}
+.php_nav li a:hover {background: url("http://www.lampbrother.net/php/statics/images/lamp/PHP_dh_abg.png") ;color: #D10B00;display: block;font: bold 14px/17px Verdana,Tahoma,'Microsoft Yahei','Simsun';text-decoration: none;width: auto;}
+.php_nav li a h1 {color: #FFFFFF;cursor: pointer;display: block;font: bold 14px/17px Verdana,Tahoma,'Microsoft Yahei','Simsun';height:53px;margin: 0;text-align: center;width:auto;line-height: 53px;}
+.php_nav li a:hover h3 {color: #d10b00;}
+.php_nav li a h1 img{float: left;}
+.php_nav .navlast {border: 0 none;}
+.phpmain {background: none repeat scroll 0 0 #FFFFFF;clear: both;margin: 12px auto 0;overflow: hidden;width: 960px;}
+.phpmain_l {float: left;height: auto;width: 667px;}
+.navlast{border:none;}
+
+/*尾部样式*/
+.php-foot {background: none repeat scroll 0 0 #D6D6D6;height:238px;width:100%}
+.phpfoot {color: #e7e7e7;height: 98px;margin: 10px auto;text-align: center;width: 960px;}
+.php_foot_left{width:463px;height:178px;float:left;}
+.foot_left_img{width:463px;height:63px;float:left;background:url(http://www.lampbrother.net/php/statics/images/lamp/foot_left_img.png) no-repeat;margin-top:10px;}
+.foot_left_liebiao{height:90px;float:left;color:black;line-height:23px;margin-left:15px;margin-top:10px;}
+.foot_left_liebiao ul{}
+.foot_xian{height:90px;border-left:1px solid #D1D1D1;border-right:1px solid white;float:left;margin-top:80px;}
+.php_foot_right{width:443px;height:178px;float:right;text-align:left;color:#555;}
+.php_foot_right h3{font-size:14px;margin-top:5px;margin-bottom:0px;}
+.php_foot_right p{line-height:24px;}
+.foot_foot{width:960px;float:left;color:#555;margin-top:15px;line-height:26px;}
+/*面包�?*/
+.php_mianbaoxie_top{width:960px;height:44px;margin:0 auto;}
+.php_mianbaoxie_top p{float:left;line-height:40px;}
+.php_mianbaoxie_top p img{margin-top:-5px;}
+.php_mianbaoxie_top p b{line-height:40px;font-size:15px;}
+.php_mianbaoxie_top p span{color:#0656A7;line-height:40px;}
+.php_mianbaoxie{height:30px;line-height:30px;float:right;line-height:16px;padding-top:5px;}
+.php_yinc{display:none;}
+
+#php_nav_t2 { display:none; position:absolute;width:140px;top:49px;padding:10px 0;background:#2e7cb1;height:auto;z-index:99999;}
+#php_nav_t2 li{border:none;display:block;width:115px; height:30px;float:left;text-align:left;}
+#php_nav_t2 li a{width:115px;color:#fff; background:#2e7cb1;z-index: 1000;font-weight:100;line-height:30px;padding-left:10px;height:30px;}
+#php_nav_t2 li a:link { width:115px;color:#fff; background:#2e7cb1;z-index: 1000;font-weight:100;line-height:30px;padding-left:10px;height:30px;} 
+#php_nav_t2 li a:hover { width:115px;color:#fff; z-index: 1000;font-weight:100;line-height:30px;padding-left:10px;height:30px;} 
+
+#php_nav_t3 {display: none;width: 140px;background:#3c87ba}
+#php_nav_t2 li:hover #php_nav_t3 {display:block; position:absolute; left:140px;width: 140px;background:#579ac7}
+#php_nav_t2 li:hover #php_nav_t3 li{background:#579ac7}
+#php_nav_t2 li:hover #php_nav_t3 li a{background:#579ac7}

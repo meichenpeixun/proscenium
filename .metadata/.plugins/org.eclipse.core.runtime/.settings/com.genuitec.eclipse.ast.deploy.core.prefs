@@ -1,0 +1,14 @@
+#Tue Oct 11 10:11:54 CST 2016
+tomcat7Server.mxt1.isExploded=true
+tomcat7Server.mxt1.isUptoDate=true
+tomcat7Server.mxt1.shouldBackup=false
+tomcat7Server.mxt1.shouldOverwrite=false
+tomcat7Server.mxt1.deployIsOverProject=false
+tomcat7Server.mxt1.isDeployed=true
+eclipse.preferences.version=1
+tomcat7Server.mxt1.noFileCopy=false
+tomcat7Server.mxt1.IEARProjectName=
+tomcat7Server.mxt1.altContextRoot=
+tomcat7Server.mxt1.deploymentPath=F\:\\apache-tomcat-7.0.70-windows-x86\\apache-tomcat-7.0.70\\webapps\\mxt1
+tomcat7Server.mxt1.type=WebDeployment
+tomcat7Server.mxt1.contextRoot=/mxt1

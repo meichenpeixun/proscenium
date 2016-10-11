@@ -1,0 +1,8 @@
+INDEX VERSION 1.122+G:\proscenium\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1610802470.index
+1344172462.index
+1779260760.index
+3001188137.index
+2219036192.index
+1880042126.index
+624882893.index

@@ -1,0 +1,4 @@
+#Fri Oct 07 21:37:32 CST 2016
+eclipse.preferences.version=1
+validator.Checked=WebRoot/upload1.jsp,WebRoot/editvideo.jsp,WebRoot/upload.jsp,WebRoot/index.jsp,WebRoot/course.jsp,WebRoot/WEB-INF
+validator.Unchecked=

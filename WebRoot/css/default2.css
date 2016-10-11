@@ -1,0 +1,71 @@
+@charset "utf-8";
+/* CSS Document */
+
+.foot h1 {
+	font-size:28px!important;
+	font-family:"Î¢ÈíÑÅºÚ"!important;
+	font-weight:normal!important;
+}
+.foot {
+	background:#27272f;
+	padding:50px 0px 30px;
+	font-size:14px;
+	font-family:"Î¢ÈíÑÅºÚ";
+}
+.foot .fl {
+	padding-left:30px;
+	margin-bottom:20px;
+}
+.foot .rl {
+	padding-right:30px;
+	margin-bottom:20px;
+}
+.foot li {
+	float:left;
+	margin-right:100px;
+}
+.foot li ul {
+	margin-top:20px;
+}
+.foot li li {
+	float:none;
+	margin:25px 0px;
+}
+.foot h1, .foot h3 {
+	color:#fff;
+}
+.foot .nl {
+	border-top: 1px solid #3d3d47;
+	padding:20px 30px 0px;
+}
+.foot .qq {
+	background:url(../images/bind.png) no-repeat top left;
+	display:block;
+	height:70px;
+	width:42px;
+}
+.foot .wx {
+	background:url(../images/bind.png) no-repeat bottom left;
+	display:block;
+	height:70px;
+	width:42px;
+}
+.foot .wb {
+	background:url(../images/bind.png) no-repeat center left;
+	display:block;
+	height:70px;
+	width:42px;
+}
+.foot .rl a {
+	float:left;
+	margin-right:15px;
+	filter: alpha(opacity=60);
+	opacity: 0.6;
+}
+.foot .rl p {
+	margin-top:5px;
+}
+.foot .rl a:hover {
+	filter: alpha(opacity=90);
+	opacity: 0.9;
+}

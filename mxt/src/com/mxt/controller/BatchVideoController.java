@@ -1,4 +1,3 @@
-
 package com.mxt.controller;
 
 import java.io.File;
@@ -92,7 +91,7 @@ public class BatchVideoController extends BaseController {
             CounseTable counse =new CounseTable();
             List<FileItem> items = sfu.parseRequest(request);
             boolean flagflv = false;    //转码成功与否的标记
-            String ffmpegpath=session.getServletContext().getRealPath("/tools/ffmpeg.exe") ;//"/usr/local/ffmpeg/bin/./ffmpeg"  session.getServletContext().getRealPath("/tools/ffmpeg.exe")   //转码工具路径
+            String ffmpegpath="/usr/local/ffmpeg/bin/./ffmpeg" ;//  session.getServletContext().getRealPath("/tools/ffmpeg.exe")   //转码工具路径
             String uploadFilepath=null; //源文件存放路径
             String codcFilePath=null; //转吗flv文件存放路径
             String videoPicPath=null;//截图存放路径
@@ -124,7 +123,7 @@ public class BatchVideoController extends BaseController {
                     System.out.println("$$$上传文件" + item.getName());
                     ServletContext sctx =session.getServletContext() ;
                     //获得保存文件的路径
-                    String basePath ="/mnt/local/tomcat-proscenium/webapps/mxt/videos";//"/mnt/local/tomcat-proscenium/webapps/mxt/videos"sctx.getRealPath("/videos");;            //sctx.getRealPath("/videos");
+                    String basePath ="/mnt/local/tomcat-proscenium/webapps/mxt/videos";//;            //sctx.getRealPath("/videos");
                     //获得文件名
                     String fileUrl= item.getName();
                     //在某些操作系统上,item.getName()方法会返回文件的完整名称,即包括路径

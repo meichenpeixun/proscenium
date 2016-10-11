@@ -1,4 +1,3 @@
-
 package com.mxt.controller;
 
 import java.io.File;
@@ -384,7 +383,7 @@ public class Per_CenController extends BaseController {
 	    	 				byte[] arr = new byte[is.available()];
 	    	 				ServletContext sctx =session.getServletContext() ;
 	                        //获得保存文件的路径
-	                        String basePath =  sctx.getRealPath("/videos");//"/mnt/local/tomcat-proscenium/webapps/mxt/videos";//
+	                        String basePath = "/mnt/local/tomcat-proscenium/webapps/mxt/videos"; //sctx.getRealPath("/videos");//
 	                        String videoPicPath = basePath + "/images/counrseIMG"; 
 	    	 				String fileName = new Date().getTime()+".jpg";
 	    	 				File file = new File(videoPicPath,fileName);
@@ -1754,7 +1753,7 @@ public class Per_CenController extends BaseController {
 		    	 				byte[] arr = new byte[is.available()];
 		    	 				ServletContext sctx =session.getServletContext() ;
 		                        //获得保存文件的路径
-		                        String basePath = sctx.getRealPath("/videos"); //"/mnt/local/tomcat-proscenium/webapps/mxt/videos";//
+		                        String basePath = "/mnt/local/tomcat-proscenium/webapps/mxt/videos"; //sctx.getRealPath("/videos");//
 		                        String videoPicPath = basePath + "/images"; 
 		    	 				String fileName = new Date().getTime()+".jpg";
 		    	 				File file = new File(videoPicPath,fileName);

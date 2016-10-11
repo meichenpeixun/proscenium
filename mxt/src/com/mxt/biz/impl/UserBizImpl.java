@@ -55,43 +55,6 @@ public class UserBizImpl<T extends User> implements UserBiz<T> {
 		return dao.getCountsToUid(userid,audit);
 	}
 
-<<<<<<< HEAD
 	
-=======
-	/**
-	 * 根据手机号查询用户
-	 */
-	public User findUserByPhone(String phone){
-		return dao.findUserByPhone(phone);
-	}
-	
-	/**
-	 * 添加用户
-	 */
-	public void appendUser(User user){
-		dao.appendUser(user);
-	}
-	
-	/**
-	 * 修改登录信息
-	 */
-	public void updateLoginInfo(User user){
-		dao.updateLoginInfo(user);
-	}
-	
-	/**
-	 * 修改密码
-	 */
-	public void updatePassword(User user){
-		dao.updatePassword(user);
-	}
-	
-	/**
-	 * 修改用户名
-	 */
-	public void updateUserName(User user){
-		dao.updateUserName(user);
-	}
->>>>>>> refs/remotes/origin/master
 }
 

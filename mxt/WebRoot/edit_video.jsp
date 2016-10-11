@@ -453,7 +453,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 }else{
                       $("#font_size2").empty();
               	 jQuery.each(data,function(key,value){
-                     $("#font_size2").append("<option value='"+value.chapterName+"m-x-t"+value.chapterId+"'>"+value.chapterName+"</option>");   
+                     $("#font_size2").append("<option value='"+value.chapterId+"'>"+value.chapterName+"</option>");   
      			           });
     			  }
 				  }

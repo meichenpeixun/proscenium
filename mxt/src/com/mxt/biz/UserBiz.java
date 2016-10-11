@@ -23,14 +23,7 @@ public interface UserBiz<T> {
 
    public int getCountsToUid(Integer userid, int audit);
 
-   public User findUserByPhone(String phone);					//根据手机号查询用户
 
-   public void appendUser(User user);								//添加用户
-   
-   public void updateLoginInfo(User user);		//修改登录信息
-   
-   public void updatePassword(User user);		//修改密码
-   
-   public void updateUserName(User user);		//修改用户名
 
+  
 }

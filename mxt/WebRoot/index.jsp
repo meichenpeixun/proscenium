@@ -944,13 +944,8 @@ height: 476px;">
 			</a>
 		</li>
 		<li>
-			<a title="" href="list_article.htm">
-				<img width="1920" height="482" alt="" style="background: url(images/banner1.jpg) no-repeat center;" src="images/alpha.png">
-			</a>
-		</li>
-		<li>
-			<a title="" href="list_article.htm">
-				<img width="1920" height="482" alt="" style="background: url(images/banner3.jpg) no-repeat center;" src="images/alpha.png">
+			<a title="" target="_blank" href="hes.jsp">
+				<img width="1920" height="482" alt="" style="background: url(images/b_2.jpg) no-repeat center;" src="images/alpha.png">
 			</a>
 		</li>
 	</ul>
@@ -960,7 +955,6 @@ height: 476px;">
 	</ul>
 	<ol id="bannerCtrl" class="flex-control-nav flex-control-paging">
 		<li><a>1</a></li>
-		<li><a>2</a></li>
 		<li><a>2</a></li>
 	</ol>
 </div>
